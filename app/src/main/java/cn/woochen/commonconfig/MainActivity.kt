@@ -6,12 +6,13 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.woochen.commonconfig.adapter.MainAdapter
-import cn.woochen.commonconfig.demo.CommonLibActivity
+import cn.woochen.commonconfig.sample.NetActivity
+import cn.woochen.commonconfig.sample.UtilActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val mItemNames = mutableListOf<String>("Common_Lib")
+    private val mItemNames = mutableListOf("工具类演示","网络请求演示")
     private val mMainAdapter by lazy {
         MainAdapter(this,mItemNames)
     }
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         rv.adapter = mMainAdapter
         mMainAdapter.itemClickListener = object: MainAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-//                Toast.makeText(this@MainActivity,mItemNames[position],Toast.LENGTH_SHORT).show()
                 itemClickEvent(position)
             }
         }
@@ -43,9 +43,10 @@ class MainActivity : AppCompatActivity() {
     private fun itemClickEvent(position: Int) {
         when (position) {
             0 -> {
-                start(CommonLibActivity::class.java)
+                start(UtilActivity::class.java)
             }
-            else -> {
+            1 -> {
+                start(NetActivity::class.java)
             }
         }
     }

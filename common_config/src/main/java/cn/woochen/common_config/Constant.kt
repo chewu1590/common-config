@@ -11,4 +11,5 @@ import android.widget.Toast
  **/
 object Constant {
     var toast: Toast? = null
+    val USER_PREF_NAME = "user_sp"
 }

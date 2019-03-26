@@ -1,9 +1,10 @@
-package cn.woochen.common_config
+package cn.woochen.common_config.util
 
-import android.content.Context
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import cn.woochen.common_config.Constant
+import cn.woochen.common_config.base.BaseApplication
 
 
 /**
@@ -11,22 +12,21 @@ import android.widget.Toast
  *@author woochen
  *@time 2019/3/15 6:50 PM
  */
-fun Any.toast(context: Context, msg: String?) {
+fun Any.toast( msg: String?) {
     if (TextUtils.isEmpty(msg)) return
     Constant.toast?.apply {
         setText(msg)
         show()
     } ?: run {
-        Toast.makeText(context.applicationContext, null, Toast.LENGTH_SHORT).apply {
+        Toast.makeText(BaseApplication.context, null, Toast.LENGTH_SHORT).apply {
             setText(msg)
             Constant.toast = this
         }.show()
     }
 }
 
-
-fun Any.toast(context: Context, stringId: Int) {
-    toast(context, context.applicationContext.getString(stringId))
+fun Any.toast(stringId: Int) {
+    toast(BaseApplication.context.getString(stringId))
 }
 
 fun Any.logee(msg: String) {

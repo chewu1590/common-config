@@ -1,6 +1,5 @@
 package com.woochen.baselibrary.base.mvp
 
-import android.hardware.Camera
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -10,6 +9,13 @@ import android.view.ViewGroup
 import cn.woochen.common_config.base.BaseFragment
 import cn.woochen.common_config.mvp.FragmentPresenterProxyImpl
 import cn.woochen.common_config.mvp.IBaseView
+import cn.woochen.common_config.mvp.proxy.IPresenterProxy
+import cn.woochen.common_config.net.state.DefaultEmptyCallback
+import cn.woochen.common_config.net.state.DefaultErrorCallback
+import cn.woochen.common_config.net.state.DefaultLoadingCallback
+import cn.woochen.common_config.net.state.DefaultLoadingHasContentCallback
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 
 
 /**
@@ -37,29 +43,33 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initView()
+        initData()
     }
 
-    protected abstract fun initView()
+    protected abstract fun initData()
 
-    override fun initLoadSir(rootView: View): View {
-        loadService = LoadSir.getDefault().register(rootView) {
+    override fun initLoadSir(contentView: View): View {
+        var loadSirTarget = setLoadSirTarget()
+        if (loadSirTarget == null) loadSirTarget = contentView
+        loadService = LoadSir.getDefault().register(loadSirTarget) {
             if (!isRetrying) {
                 isRetrying = true
                 if (mRetryHandler != null) {
                     mRetryHandler!!.sendEmptyMessageDelayed(MESSAGE_RETRY_CODE, 3000)
                     requestData()
                 }
-            } else {
-                //                    ToastUtil.showToast(R.string.much_operate);
             }
         }
-        //        showLoading(true);
         return loadService!!.loadLayout
     }
 
     /**
-     * 数据请求(重试)
+     * 设置状态页面的目标view
+     */
+    private fun setLoadSirTarget(): Any? = null
+
+    /**
+     * 数据请求(重试时默认会执行)
      */
     protected fun requestData() {
 
@@ -80,18 +90,18 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
     }
 
     override fun showEmpty() {
-        loadService!!.showCallback(EmptyCallback::class.java)
+        loadService!!.showCallback(DefaultEmptyCallback::class.java)
     }
 
     override fun showError() {
-        loadService!!.showCallback(Camera.ErrorCallback::class.java)
+        loadService!!.showCallback(DefaultErrorCallback::class.java)
     }
 
     override fun showLoading(showContent: Boolean) {
         if (showContent) {
-            loadService!!.showCallback(LoadingHasContentCallback::class.java)
+            loadService!!.showCallback(DefaultLoadingHasContentCallback::class.java)
         } else {
-            loadService!!.showCallback(LoadingCallback::class.java)
+            loadService!!.showCallback(DefaultLoadingCallback::class.java)
         }
     }
 

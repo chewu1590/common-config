@@ -5,41 +5,42 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".sample.NetActivity">
 
-        tools:context=".demo.CommonLibActivity">
 
     <Button
-            android:id="@+id/btn_general"
+            android:id="@+id/btn_request"
+            android:background="@drawable/select_bg_blue_white"
+            android:textColor="@drawable/select_txt_white_black"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="普通dialog"
-            android:textSize="15sp"
-            android:textColor="@drawable/select_txt_white_black"
-            android:background="@drawable/select_bg_blue_white"
+            android:textSize="20sp"
+            android:text="请求网络"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="200dp"
+            app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+
     <Button
-            android:layout_marginTop="15dp"
-            android:id="@+id/btn_purple"
+            android:id="@+id/btn_suc"
+            android:background="@drawable/select_bg_blue_white"
+            android:textColor="@drawable/select_txt_white_black"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="目标dialog"
-            app:layout_constraintLeft_toLeftOf="@+id/btn_general"
-            app:layout_constraintTop_toBottomOf="@+id/btn_general"
-            android:textSize="15sp"
-            android:textColor="@drawable/select_txt_white_black"
-            android:background="@drawable/select_bg_blue_white"
+            android:textSize="20sp"
+            android:text="模拟成功"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_request"
+            android:layout_marginTop="20dp"
+            app:layout_constraintRight_toRightOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

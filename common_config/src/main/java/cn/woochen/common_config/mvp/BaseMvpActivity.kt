@@ -1,14 +1,15 @@
 package cn.woochen.common_config.mvp
 
-import android.hardware.Camera
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.view.WindowManager
 import cn.woochen.common_config.base.BaseActivity
 import cn.woochen.common_config.mvp.proxy.IPresenterProxy
+import cn.woochen.common_config.net.state.DefaultEmptyCallback
+import cn.woochen.common_config.net.state.DefaultErrorCallback
+import cn.woochen.common_config.net.state.DefaultLoadingCallback
+import cn.woochen.common_config.net.state.DefaultLoadingHasContentCallback
 import com.kingja.loadsir.callback.Callback
-import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 
@@ -21,7 +22,7 @@ import com.kingja.loadsir.core.LoadSir
  * @desc
  */
 
-abstract class  BaseMvpActivity : BaseActivity(), IBaseView {
+abstract class BaseMvpActivity : BaseActivity(), IBaseView {
     protected lateinit var mPresenterProxy: IPresenterProxy
     private var loadService: LoadService<*>? = null
     private var isRetrying: Boolean = false
@@ -37,23 +38,20 @@ abstract class  BaseMvpActivity : BaseActivity(), IBaseView {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun initLoadLayout() {
         val onReloadListener = Callback.OnReloadListener {
             if (!isRetrying) {
                 isRetrying = true
                 if (mRetryHandler != null) {
                     mRetryHandler!!.sendEmptyMessageDelayed(MESSAGE_RETRY_CODE, 3000)
-                    onNetReload()
+                    requestData()
                 }
             }
         }
         var loadSirTarget = setLoadSirTarget()
         if (loadSirTarget == null) loadSirTarget = this
-        loadService = setLoadConfit()?.register(loadSirTarget, onReloadListener)
+        loadService = LoadSir.getDefault().register(loadSirTarget, onReloadListener)
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -65,19 +63,15 @@ abstract class  BaseMvpActivity : BaseActivity(), IBaseView {
     }
 
 
-
-    protected open fun setLoadConfit(): LoadSir? {
-        return
-    }
-
-    protected open fun setLoadSirTarget(): Any? {
-        return null
-    }
+    /**
+     * 设置状态页面的目标view
+     */
+    protected open fun setLoadSirTarget(): Any? = null
 
     /**
      * 请求网络数据(错误重试执行)
      */
-    protected open fun onNetReload() {
+    protected open fun requestData() {
 
     }
 
@@ -87,18 +81,18 @@ abstract class  BaseMvpActivity : BaseActivity(), IBaseView {
     }
 
     override fun showEmpty() {
-        loadService!!.showCallback(EmptyCallback::class.java)
+        loadService!!.showCallback(DefaultEmptyCallback::class.java)
     }
 
     override fun showError() {
-        loadService!!.showCallback(Camera.ErrorCallback::class.java)
+        loadService!!.showCallback(DefaultErrorCallback::class.java)
     }
 
     override fun showLoading(showContent: Boolean) {
         if (showContent) {
-            loadService!!.showCallback(LoadingHasContentCallback::class.java)
+            loadService!!.showCallback(DefaultLoadingHasContentCallback::class.java)
         } else {
-            loadService!!.showCallback(LoadingCallback::class.java)
+            loadService!!.showCallback(DefaultLoadingCallback::class.java)
         }
     }
 
