@@ -1,8 +1,5 @@
 package cn.woochen.common_config.mvp
 
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
-
 /**
  * presenter注解
  * @author woochen123
@@ -10,5 +7,5 @@ import java.lang.annotation.RetentionPolicy
  * @desc
  */
 @Target(AnnotationTarget.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
+@Retention
 annotation class InjectPresenter

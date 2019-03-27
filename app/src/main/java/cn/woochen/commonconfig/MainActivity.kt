@@ -1,10 +1,10 @@
 package cn.woochen.commonconfig
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import cn.woochen.commonconfig.adapter.MainAdapter
 import cn.woochen.commonconfig.sample.NetActivity
 import cn.woochen.commonconfig.sample.UtilActivity
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        rv.layoutManager = LinearLayoutManager(this,RecyclerView.VERTICAL,false)
+        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
         rv.adapter = mMainAdapter
         mMainAdapter.itemClickListener = object: MainAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
