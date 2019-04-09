@@ -7,12 +7,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import cn.woochen.commonconfig.adapter.MainAdapter
 import cn.woochen.commonconfig.sample.NetActivity
+import cn.woochen.commonconfig.sample.PermissonActivity
 import cn.woochen.commonconfig.sample.UtilActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val mItemNames = mutableListOf("工具类演示","网络请求演示")
+    private val mItemNames = mutableListOf("工具类演示","网络请求演示","权限请求")
     private val mMainAdapter by lazy {
         MainAdapter(this,mItemNames)
     }
@@ -47,6 +48,9 @@ class MainActivity : AppCompatActivity() {
             }
             1 -> {
                 start(NetActivity::class.java)
+            }
+            2 -> {
+                start(PermissonActivity::class.java)
             }
         }
     }
