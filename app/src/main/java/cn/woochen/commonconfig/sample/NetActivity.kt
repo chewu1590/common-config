@@ -23,6 +23,7 @@ class NetActivity : BaseMvpActivity(), View.OnClickListener ,TestContract.ITestV
         logee("请求失败！")
     }
 
+
     override fun onClick(v: View?) {
         when (v) {
             btn_request -> {

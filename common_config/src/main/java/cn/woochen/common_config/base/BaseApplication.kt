@@ -1,16 +1,15 @@
 package cn.woochen.common_config.base
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import cn.woochen.common_config.net.DefaultRetrofitUtil
-import cn.woochen.common_config.net.state.DefaultLoadingCallback
 import cn.woochen.common_config.net.state.DefaultEmptyCallback
 import cn.woochen.common_config.net.state.DefaultErrorCallback
+import cn.woochen.common_config.net.state.DefaultLoadingCallback
 import cn.woochen.common_config.net.state.DefaultLoadingHasContentCallback
 import cn.woochen.common_config.util.UserPref
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
-import retrofit2.Retrofit
 
 
 /**
@@ -23,7 +22,8 @@ import retrofit2.Retrofit
 open class BaseApplication : Application() {
 
     companion object {
-        lateinit var context:Context
+        @SuppressLint("StaticFieldLeak")
+        lateinit var context: Context
     }
 
     override fun onCreate() {
@@ -34,12 +34,18 @@ open class BaseApplication : Application() {
     }
 
 
-
-    private fun initSp() {
+    open fun initSp() {
         UserPref.setContext(this)
     }
 
-    private fun initLoadSir() {
+    /**
+     *init LoadingLayout
+     * @desc if necessary,can override this method.if you do this,you must override the  method such as showContent() etc
+     * under of the class for their subclass
+     * @see cn.woochen.common_config.mvp.BaseMvpActivity
+     * @see cn.woochen.common_config.mvp.BaseMvpFragment
+     */
+    open fun initLoadSir() {
         LoadSir.beginBuilder()
             .addCallback(DefaultErrorCallback())
             .addCallback(DefaultEmptyCallback())
@@ -48,4 +54,5 @@ open class BaseApplication : Application() {
             .setDefaultCallback(SuccessCallback::class.java)
             .commit()
     }
+
 }

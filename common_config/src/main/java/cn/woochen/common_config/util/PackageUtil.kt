@@ -67,8 +67,6 @@ object PackageUtil {
                         return activityField.get(activityRecord) as Activity
                     }
                 }
-            } catch (e: ClassNotFoundException) {
-                e.printStackTrace()
             } catch (e: InvocationTargetException) {
                 e.printStackTrace()
             } catch (e: NoSuchMethodException) {

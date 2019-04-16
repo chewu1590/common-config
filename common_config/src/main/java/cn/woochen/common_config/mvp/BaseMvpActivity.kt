@@ -24,7 +24,7 @@ import com.kingja.loadsir.core.LoadSir
 
 abstract class BaseMvpActivity : BaseActivity(), IBaseView {
     protected lateinit var mPresenterProxy: IPresenterProxy
-    private var loadService: LoadService<*>? = null
+    var loadService: LoadService<*>? = null
     private var isRetrying: Boolean = false
     private var mRetryHandler: Handler? = object : Handler() {
         override fun handleMessage(msg: Message?) {

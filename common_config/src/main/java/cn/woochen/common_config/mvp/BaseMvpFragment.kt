@@ -1,4 +1,4 @@
-package com.woochen.baselibrary.base.mvp
+package cn.woochen.common_config.mvp
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cn.woochen.common_config.base.BaseFragment
-import cn.woochen.common_config.mvp.FragmentPresenterProxyImpl
-import cn.woochen.common_config.mvp.IBaseView
 import cn.woochen.common_config.mvp.proxy.IPresenterProxy
 import cn.woochen.common_config.net.state.DefaultEmptyCallback
 import cn.woochen.common_config.net.state.DefaultErrorCallback
