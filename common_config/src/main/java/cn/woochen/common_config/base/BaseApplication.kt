@@ -31,6 +31,7 @@ open class BaseApplication : Application() {
         context = this
         initLoadSir()
         initSp()
+        //bug collection,push,data collection,mutiChannel pack
     }
 
 

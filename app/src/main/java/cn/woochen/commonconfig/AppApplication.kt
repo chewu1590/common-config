@@ -16,7 +16,6 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         initRetrofit()
-
     }
 
 
@@ -29,8 +28,6 @@ class AppApplication : BaseApplication() {
         DefaultRetrofitUtil.getInstance().init(UrlConstainer.appBaseUrl)
     }
 
-   override fun initLoadSir(){
 
-    }
 }
 
