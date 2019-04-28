@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.adapter.MainAdapter
 import cn.woochen.commonconfig.sample.NetActivity
 import cn.woochen.commonconfig.sample.PermissonActivity
@@ -12,6 +13,7 @@ import cn.woochen.commonconfig.sample.UtilActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private var exitTime: Long = 0
 
     private val mItemNames = mutableListOf("工具类演示","网络请求演示","权限请求")
     private val mMainAdapter by lazy {
@@ -61,6 +63,17 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            toast("再按一下退出亿修哥")
+            exitTime = System.currentTimeMillis()
+        } else {
+            finish()
+            System.exit(0)
+        }
+    }
+
 
 
 }

@@ -2,6 +2,7 @@ package cn.woochen.common_config.util
 
 import android.text.TextUtils
 import android.util.Log
+import android.view.Gravity
 import android.widget.Toast
 import cn.woochen.common_config.Constant
 import cn.woochen.common_config.base.BaseApplication
@@ -12,7 +13,7 @@ import cn.woochen.common_config.base.BaseApplication
  *@author woochen
  *@time 2019/3/15 6:50 PM
  */
-fun Any.toast( msg: String?) {
+fun Any.toast(msg: String?) {
     if (TextUtils.isEmpty(msg)) return
     Constant.toast?.apply {
         setText(msg)
@@ -20,6 +21,7 @@ fun Any.toast( msg: String?) {
     } ?: run {
         Toast.makeText(BaseApplication.context, null, Toast.LENGTH_SHORT).apply {
             setText(msg)
+            setGravity(Gravity.CENTER,0,0)
             Constant.toast = this
         }.show()
     }

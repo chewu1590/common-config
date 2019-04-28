@@ -90,8 +90,8 @@ class DefaultRetrofitUtil {
         return this
     }
 
-    fun interceptor(intercepterList: Interceptor): DefaultRetrofitUtil {
-        intercepters.add(intercepterList)
+    fun interceptor(intercepter: Interceptor): DefaultRetrofitUtil {
+        intercepters.add(intercepter)
         return this
     }
 
