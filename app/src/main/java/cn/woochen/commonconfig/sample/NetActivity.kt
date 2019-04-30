@@ -15,6 +15,9 @@ import kotlin.concurrent.thread
  * 网络请求演示
  */
 class NetActivity : BaseMvpActivity(), View.OnClickListener ,TestContract.ITestView{
+
+
+
     override fun testSuc() {
 
     }

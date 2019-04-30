@@ -69,7 +69,7 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
     /**
      * 数据请求(重试时默认会执行)
      */
-    protected fun requestData() {
+    protected open fun requestData() {
 
     }
 
