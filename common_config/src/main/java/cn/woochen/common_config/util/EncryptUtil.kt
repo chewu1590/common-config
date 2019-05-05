@@ -7,13 +7,13 @@ import java.security.MessageDigest
  * 加密解密工具类
  * @author woochen
  * @time 2017/8/24 10:21
- * @desc 功能简述: 加密解密工具类，对MD5/BASE64/DES/RSA等算法提供了包装.
+ * @desc
  */
 
 object EncryptUtil {
     var hexDigits = arrayOf("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f")
 
-    private fun encryptMD5(originString: String?): String {
+    fun encryptMD5(originString: String?): String {
         if (originString != null) {
             try {
                 val md5 = MessageDigest.getInstance("MD5")
