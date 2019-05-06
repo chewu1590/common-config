@@ -48,7 +48,7 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
 
     override fun initLoadSir(contentView: View) {
         var loadSirTarget = setLoadSirTarget()
-        if (loadSirTarget == null) loadSirTarget = contentView
+        if (loadSirTarget == null) loadSirTarget = (contentView as ViewGroup).getChildAt(0)
         loadService = LoadSir.getDefault().register(loadSirTarget) {
             if (!isRetrying) {
                 isRetrying = true
