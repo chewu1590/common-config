@@ -46,7 +46,7 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
 
     protected abstract fun initData()
 
-    override fun initLoadSir(contentView: View): View {
+    override fun initLoadSir(contentView: View) {
         var loadSirTarget = setLoadSirTarget()
         if (loadSirTarget == null) loadSirTarget = contentView
         loadService = LoadSir.getDefault().register(loadSirTarget) {
@@ -58,7 +58,6 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
                 }
             }
         }
-        return loadService!!.loadLayout
     }
 
     /**

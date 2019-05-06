@@ -2,10 +2,10 @@ package cn.woochen.common_config.base
 
 
 import android.app.Activity
+import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +25,11 @@ abstract class BaseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mContext = this.activity!!
         contentView = inflater.inflate(setContentView(), container, false)
-        contentView = initLoadSir(contentView)
+        initLoadSir(contentView)
         return contentView
     }
 
-    protected abstract fun initLoadSir(contentView: View): View
+    protected abstract fun initLoadSir(contentView: View)
 
     /**
      * 启动Activity
