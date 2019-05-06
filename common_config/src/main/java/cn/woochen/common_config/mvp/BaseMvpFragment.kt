@@ -24,8 +24,8 @@ import com.kingja.loadsir.core.LoadSir
  */
 
 abstract class BaseMvpFragment : BaseFragment(), IBaseView {
-    lateinit var mPresenterProxy: IPresenterProxy
-    private var loadService: LoadService<*>? = null
+    protected lateinit var mPresenterProxy: IPresenterProxy
+    protected var loadService: LoadService<*>? = null
     private var isRetrying: Boolean = false
     private var mRetryHandler: Handler? = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -64,7 +64,7 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
     /**
      * 设置状态页面的目标view
      */
-    private fun setLoadSirTarget(): Any? = null
+    protected open fun setLoadSirTarget(): Any? = null
 
     /**
      * 数据请求(重试时默认会执行)
