@@ -15,15 +15,19 @@ import cn.woochen.common_config.base.BaseApplication
  */
 fun Any.toast(msg: String?) {
     if (TextUtils.isEmpty(msg)) return
-    Constant.toast?.apply {
-        setText(msg)
-        show()
-    } ?: run {
-        Toast.makeText(BaseApplication.context, null, Toast.LENGTH_SHORT).apply {
+    try {
+        Constant.toast?.apply {
             setText(msg)
-            setGravity(Gravity.CENTER,0,0)
-            Constant.toast = this
-        }.show()
+            show()
+        } ?: run {
+            Toast.makeText(BaseApplication.context, null, Toast.LENGTH_SHORT).apply {
+                setText(msg)
+                setGravity(Gravity.CENTER,0,0)
+                Constant.toast = this
+            }.show()
+        }
+    } catch (e: Exception) {
+        Toast.makeText(BaseApplication.context, msg, Toast.LENGTH_SHORT).show()
     }
 }
 

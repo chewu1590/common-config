@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import cn.woochen.common_config.util.GlideUtil
 import cn.woochen.common_config.util.logee
 import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.R
@@ -37,5 +38,6 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         btn_general.setOnClickListener(this)
         btn_purple.setOnClickListener(this)
+        GlideUtil.loadCircle(this,"http://pic26.nipic.com/20121227/10193203_131357536000_2.jpg",iv_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher)
     }
 }
