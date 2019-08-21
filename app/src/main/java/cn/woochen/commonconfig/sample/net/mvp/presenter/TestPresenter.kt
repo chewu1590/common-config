@@ -1,11 +1,11 @@
-package cn.woochen.commonconfig.sample.mvp.presenter
+package cn.woochen.commonconfig.sample.net.mvp.presenter
 
 import cn.woochen.common_config.mvp.BasePresenter
 import cn.woochen.common_config.net.helper.DefaultBaseObserver
 import cn.woochen.common_config.net.helper.DefaultException
 import cn.woochen.commonconfig.bean.TestBean
-import cn.woochen.commonconfig.sample.mvp.contract.TestContract
-import cn.woochen.commonconfig.sample.mvp.model.TestModel
+import cn.woochen.commonconfig.sample.net.mvp.contract.TestContract
+import cn.woochen.commonconfig.sample.net.mvp.model.TestModel
 
 /**
  *

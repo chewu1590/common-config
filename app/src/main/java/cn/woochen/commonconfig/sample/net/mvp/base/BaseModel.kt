@@ -1,7 +1,7 @@
-package cn.woochen.commonconfig.sample.mvp.base
+package cn.woochen.commonconfig.sample.net.mvp.base
 
 import cn.woochen.common_config.net.DefaultRetrofitUtil
-import cn.woochen.commonconfig.sample.api.ApiService
+import cn.woochen.commonconfig.sample.net.api.ApiService
 
 /**
  *

@@ -1,4 +1,4 @@
-package cn.woochen.commonconfig.sample
+package cn.woochen.commonconfig.sample.net
 
 import android.os.SystemClock
 import android.view.View
@@ -6,8 +6,8 @@ import cn.woochen.common_config.mvp.BaseMvpActivity
 import cn.woochen.common_config.mvp.InjectPresenter
 import cn.woochen.common_config.util.logee
 import cn.woochen.commonconfig.R
-import cn.woochen.commonconfig.sample.mvp.contract.TestContract
-import cn.woochen.commonconfig.sample.mvp.presenter.TestPresenter
+import cn.woochen.commonconfig.sample.net.mvp.contract.TestContract
+import cn.woochen.commonconfig.sample.net.mvp.presenter.TestPresenter
 import kotlinx.android.synthetic.main.activity_net.*
 import kotlin.concurrent.thread
 

@@ -1,9 +1,9 @@
-package cn.woochen.commonconfig.sample.mvp.model
+package cn.woochen.commonconfig.sample.net.mvp.model
 
 import cn.woochen.common_config.net.bean.DefaultBaseBean
 import cn.woochen.common_config.net.helper.RxSchedulers
 import cn.woochen.commonconfig.bean.TestBean
-import cn.woochen.commonconfig.sample.mvp.base.BaseModel
+import cn.woochen.commonconfig.sample.net.mvp.base.BaseModel
 import io.reactivex.Observer
 
 /**

@@ -7,15 +7,16 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.adapter.MainAdapter
-import cn.woochen.commonconfig.sample.NetActivity
 import cn.woochen.commonconfig.sample.PermissonActivity
 import cn.woochen.commonconfig.sample.UtilActivity
+import cn.woochen.commonconfig.sample.net.NetActivity
+import cn.woochen.commonconfig.sample.tab.SwitchTabActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private var exitTime: Long = 0
 
-    private val mItemNames = mutableListOf("工具类演示","网络请求演示","权限请求")
+    private val mItemNames = mutableListOf("工具类演示","网络请求演示","权限请求","页签切换")
     private val mMainAdapter by lazy {
         MainAdapter(this,mItemNames)
     }
@@ -42,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun itemClickEvent(position: Int) {
         when (position) {
             0 -> {
@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
             }
             2 -> {
                 start(PermissonActivity::class.java)
+            }
+            3 -> {
+                start(SwitchTabActivity::class.java)
             }
         }
     }

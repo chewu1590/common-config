@@ -1,4 +1,4 @@
-package cn.woochen.commonconfig.sample.mvp.contract
+package cn.woochen.commonconfig.sample.net.mvp.contract
 
 import cn.woochen.common_config.mvp.IBaseView
 

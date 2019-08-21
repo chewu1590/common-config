@@ -1,4 +1,4 @@
-package cn.woochen.commonconfig.sample.api
+package cn.woochen.commonconfig.sample.net.api
 
 /**
  *

@@ -1,10 +1,9 @@
-package cn.woochen.commonconfig.sample.api
+package cn.woochen.commonconfig.sample.net.api
 
 import cn.woochen.common_config.net.bean.DefaultBaseBean
 import cn.woochen.commonconfig.bean.TestBean
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.POST
 
 /**
  *
