@@ -42,3 +42,5 @@ fun Any.logee(msg: String) {
 fun Any.soutt(msg: String) {
     System.err.println("${javaClass.simpleName} ->" + msg)
 }
+
+
