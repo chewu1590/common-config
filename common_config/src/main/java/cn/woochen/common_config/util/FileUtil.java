@@ -51,7 +51,6 @@ public class FileUtil {
     public static boolean delete(Context context, String delFile) {
         File file = new File(delFile);
         if (!file.exists()) {
-//            Toast.makeText(context.getApplicationContext(), "删除文件失败:" + delFile + "不存在！", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             if (file.isFile())
@@ -75,11 +74,9 @@ public class FileUtil {
                 Log.e("--Method--", "Copy_Delete.deleteSingleFile: 删除单个文件" + filePath$Name + "成功！");
                 return true;
             } else {
-//                Toast.makeText(context.getApplicationContext(), "删除单个文件" + filePath$Name + "失败！", Toast.LENGTH_SHORT).show();
                 return false;
             }
         } else {
-//            Toast.makeText(context.getApplicationContext(), "删除单个文件失败：" + filePath$Name + "不存在！", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -97,7 +94,6 @@ public class FileUtil {
         File dirFile = new File(filePath);
         // 如果dir对应的文件不存在，或者不是一个目录，则退出
         if ((!dirFile.exists()) || (!dirFile.isDirectory())) {
-//            Toast.makeText(context.getApplicationContext(), "删除目录失败：" + filePath + "不存在！", Toast.LENGTH_SHORT).show();
             return false;
         }
         boolean flag = true;
@@ -118,7 +114,6 @@ public class FileUtil {
             }
         }
         if (!flag) {
-//            Toast.makeText(context.getApplicationContext(), "删除目录失败！", Toast.LENGTH_SHORT).show();
             return false;
         }
         // 删除当前目录
@@ -126,7 +121,6 @@ public class FileUtil {
             Log.e("--Method--", "Copy_Delete.deleteDirectory: 删除目录" + filePath + "成功！");
             return true;
         } else {
-//            Toast.makeText(context.getApplicationContext(), "删除目录：" + filePath + "失败！", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -176,5 +170,28 @@ public class FileUtil {
         }
         return content;
     }
+
+
+    /**
+     * 读取asset中的文件
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String readAssetsTxt(Context context, String fileName){
+        try {
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String text = new String(buffer, "utf-8");
+            return text;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "读取错误，请检查文件名";
+    }
+
 
 }

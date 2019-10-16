@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (System.currentTimeMillis() - exitTime > 2000) {
-            toast("再按一下退出亿修哥")
+            toast("再按一下退出程序")
             exitTime = System.currentTimeMillis()
         } else {
             finish()
