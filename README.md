@@ -1,6 +1,8 @@
 # CommonConfig
 a common config library, include mvp arm, utils, net(Retrofit + RxJava) ,image load(Glide) and so on. 
 
+[![](https://jitpack.io/v/chewu1590/common-config.svg)](https://jitpack.io/#chewu1590/common-config)
+
 Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
@@ -14,5 +16,7 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.chewu1590:common-config:1.0.3'
+	        implementation 'com.github.chewu1590:common-config:latest_version'
+		//androidx version
+		implementation 'com.github.chewu1590:common-config:latest_version-x'
 	}
