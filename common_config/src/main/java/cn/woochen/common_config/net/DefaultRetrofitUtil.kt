@@ -3,19 +3,19 @@ package cn.woochen.common_config.net
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
-/**
- *默认的Retrofit管理类(可作为参考用于自定义)
- *@author woochen
- *@time 2019/3/26 10:32 AM
- */
 class DefaultRetrofitUtil {
+
     private constructor()
+
+    private val converterFactories = mutableListOf<Converter.Factory>()
+    private val callAdapterFactories = mutableListOf<CallAdapter.Factory>()
 
     private var debugMode = true
     private var timeout = 5L
@@ -58,12 +58,24 @@ class DefaultRetrofitUtil {
                 clientBuilder.addInterceptor(intercepter)
             }
         }
-        retrofit = Retrofit.Builder()
+        val retrofitBuilder = Retrofit.Builder()
             .client(clientBuilder.build())
             .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+        if (converterFactories.size > 0){
+            converterFactories.forEach {
+                retrofitBuilder.addConverterFactory(it)
+            }
+        }else{
+            retrofitBuilder.addConverterFactory(GsonConverterFactory.create())
+        }
+        if (callAdapterFactories.size > 0){
+            callAdapterFactories.forEach {
+                retrofitBuilder.addCallAdapterFactory(it)
+            }
+        }else{
+            retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        }
+        retrofit = retrofitBuilder.build()
     }
 
     /**
@@ -82,17 +94,42 @@ class DefaultRetrofitUtil {
         return this
     }
 
+
     /**
-     * 拦截器集合
+     * 拦截器集合(多个)
      */
     fun interceptors(intercepterList: List<Interceptor>): DefaultRetrofitUtil {
         intercepters.addAll(intercepterList)
         return this
     }
 
+    /**
+     * 拦截器集合(单个)
+     */
     fun interceptor(intercepter: Interceptor): DefaultRetrofitUtil {
         intercepters.add(intercepter)
         return this
     }
+
+
+    /**
+     * 转化器
+     */
+    fun converterFactory(converterFactory: Converter.Factory): DefaultRetrofitUtil {
+        converterFactories.add(converterFactory)
+        return this
+    }
+
+
+    /**
+     * 适配器工厂
+     */
+    fun callAdapterFactory(callAdapterFactory: CallAdapter.Factory): DefaultRetrofitUtil {
+        callAdapterFactories.add(callAdapterFactory)
+        return this
+    }
+
+
+
 
 }

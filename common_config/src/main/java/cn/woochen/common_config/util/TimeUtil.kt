@@ -53,6 +53,25 @@ object TimeUtil {
 
     }
 
+    /**
+     * 秒转化为形如 36：00的时间
+     * time 秒
+     */
+    fun tranSecToMInSec2(time: kotlin.Long): String {
+        val sb = StringBuffer()
+        val min = time / 60
+        val sec = time % 60
+        if (min > 0){
+            sb.append(min)
+            sb.append("分")
+        }
+        if (sec > 0){
+            sb.append(sec)
+            sb.append("秒")
+        }
+        return sb.toString()
+
+    }
 
     /**
      * 得到当前时间毫秒值
@@ -60,17 +79,6 @@ object TimeUtil {
     fun getCurrentTime():Long{
         val calendar = Calendar.getInstance()
         return calendar.timeInMillis//这是时间戳
-    }
-
-    /**
-     * 计算挂账天数
-     */
-    fun calcSettleAccountTime(targetTime:Long):Int{
-        var day = 0
-        val calendar = Calendar.getInstance()
-        day = (1.0 * (calendar.timeInMillis / 1000L  - targetTime) / 60 / 60 / 24).toInt()
-        if (day < 1) day = 1
-        return  day
     }
 
 

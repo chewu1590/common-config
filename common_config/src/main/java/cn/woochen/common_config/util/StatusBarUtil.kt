@@ -12,6 +12,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
+
 /**
  * 改变状态栏的颜色
  * @author woochen123
@@ -19,6 +20,11 @@ import java.io.InputStreamReader
  * @desc
  */
 object StatusBarUtil {
+
+
+    private val isOverMiUi7  by lazy {
+        getSystemProperty()
+    }
 
     /**
      * 全透明状态栏
@@ -98,7 +104,8 @@ object StatusBarUtil {
     private fun createStatusBarView(activity: Activity): View {
         val statusBarView = View(activity)
         val statusBarParams = ViewGroup.MarginLayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity))
+                ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity)
+        )
         statusBarView.layoutParams = statusBarParams
         return statusBarView
     }
@@ -148,7 +155,10 @@ object StatusBarUtil {
         } else if (type == 2) {
             FlymeSetStatusBarLightMode(activity, false)
         } else if (type == 3) {
-            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_VISIBLE
+            }
+
         }
     }
 
@@ -175,7 +185,7 @@ object StatusBarUtil {
                     extraFlagField.invoke(window, 0, darkModeFlag)//清除黑色字体
                 }
                 result = true
-                if (getSystemProperty() &&Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {
+                if (isOverMiUi7 &&Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {
                     //开发版 7.7.13 及以后版本采用了系统API，旧方法无效但不会报错，所以两个方式都要加上
                     if (dark) {
                         activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -190,6 +200,7 @@ object StatusBarUtil {
         }
         return result
     }
+
 
 
     fun getSystemProperty(): Boolean {
