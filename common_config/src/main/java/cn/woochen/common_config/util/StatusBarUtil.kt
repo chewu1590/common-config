@@ -213,7 +213,7 @@ object StatusBarUtil {
             input.close()
             if (line != null) {
                 val code = Integer.parseInt(line)
-                return code > 7
+                return code >= 7
             } else {
                 return false
             }
