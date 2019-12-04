@@ -17,6 +17,4 @@ Step 2. Add the dependency
 
 	dependencies {
 	        implementation 'com.github.chewu1590:common-config:latest_version'
-		//androidx version
-		implementation 'com.github.chewu1590:common-config:latest_version-x'
 	}
