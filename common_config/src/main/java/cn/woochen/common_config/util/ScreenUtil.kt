@@ -22,11 +22,6 @@ object ScreenUtil {
             //屏幕密度表示为每英寸点数。
             //显示器的逻辑密度。
             //显示屏上显示的字体缩放系数。
-            Log.d(
-                "display", "widthPixels = " + widthPixels + ",heightPixels = " + heightPixels + "\n" +
-                        ",densityDpi = " + densityDpi + "\n" +
-                        ",density = " + density + ",scaledDensity = " + scaledDensity
-            )
         }
     }
 
