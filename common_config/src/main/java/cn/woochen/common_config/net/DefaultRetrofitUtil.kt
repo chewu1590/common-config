@@ -20,6 +20,7 @@ class DefaultRetrofitUtil {
     private var debugMode = true
     private var timeout = 5L
     private val intercepters = mutableListOf<Interceptor>()
+    private val networkIntercepters = mutableListOf<Interceptor>()
     var retrofit: Retrofit? = null
         get() {
             if (field == null) {
@@ -56,6 +57,11 @@ class DefaultRetrofitUtil {
         if (intercepters.isNotEmpty()) {
             for (intercepter in intercepters) {
                 clientBuilder.addInterceptor(intercepter)
+            }
+        }
+        if (networkIntercepters.isNotEmpty()) {
+            for (intercepter in networkIntercepters) {
+                clientBuilder.addNetworkInterceptor(intercepter)
             }
         }
         val retrofitBuilder = Retrofit.Builder()
@@ -108,6 +114,22 @@ class DefaultRetrofitUtil {
      */
     fun interceptor(intercepter: Interceptor): DefaultRetrofitUtil {
         intercepters.add(intercepter)
+        return this
+    }
+
+    /**
+     * 网络拦截器集合(多个)
+     */
+    fun networkInterceptors(intercepterList: List<Interceptor>): DefaultRetrofitUtil {
+        networkIntercepters.addAll(intercepterList)
+        return this
+    }
+
+    /**
+     * 网络拦截器集合(单个)
+     */
+    fun networkInterceptor(intercepter: Interceptor): DefaultRetrofitUtil {
+        networkIntercepters.add(intercepter)
         return this
     }
 
