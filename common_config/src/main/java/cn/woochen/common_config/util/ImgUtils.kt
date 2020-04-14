@@ -43,7 +43,6 @@ object ImgUtils {
             //保存图片后发送广播通知更新数据库
             val uri = Uri.fromFile(file)
             context.sendBroadcast(Intent(ACTION_MEDIA_SCANNER_SCAN_FILE, uri))
-            toast(if (isSuccess) "成功保存到${storePath}" else "保存失败")
             return isSuccess
         } catch (e: IOException) {
             e.printStackTrace()

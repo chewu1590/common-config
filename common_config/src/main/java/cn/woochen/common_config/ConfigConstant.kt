@@ -1,7 +1,5 @@
 package cn.woochen.common_config
 
-import android.widget.Toast
-
 /**
  *
  * 类描述：
@@ -9,7 +7,7 @@ import android.widget.Toast
  * 创建时间：2019/3/15 6:42 PM
  * 修改备注：
  **/
-object Constant {
-    var toast: Toast? = null
+object ConfigConstant {
     val USER_PREF_NAME = "user_sp"
+    val CONFIG_PREF_NAME = "config_sp"
 }

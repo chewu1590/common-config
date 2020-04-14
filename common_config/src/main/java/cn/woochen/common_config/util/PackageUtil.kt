@@ -144,33 +144,22 @@ object PackageUtil {
 
     /**
      * 获取当前进程名
-     * @param context
-     * @return 进程名
      */
-    fun getProcessName(context: Context): String {
-        var processName: String? = null
-
-        // ActivityManager
-        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-
-        while (true) {
-            for (info in am.runningAppProcesses) {
-                if (info.pid == android.os.Process.myPid()) {
-                    processName = info.processName
-                    break
-                }
+    private fun getCurrentProcessName(context: Context): String {
+        val pid = android.os.Process.myPid()
+        var processName = ""
+        val manager =
+            context.applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (process in manager.runningAppProcesses) {
+            if (process.pid == pid) {
+                processName = process.processName
             }
-            // go home
-            if (!TextUtils.isEmpty(processName)) {
-                return processName!!
-            }
-            // take a rest and again
-            try {
-                Thread.sleep(100L)
-            } catch (ex: InterruptedException) {
-                ex.printStackTrace()
-            }
-
         }
+        return processName
     }
+
+    /**
+     * 是否为主进程
+     */
+    fun isMainProcess(context: Context)= context.applicationContext.packageName == getCurrentProcessName(context)
 }

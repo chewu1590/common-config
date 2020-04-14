@@ -7,6 +7,7 @@ import cn.woochen.common_config.net.state.DefaultEmptyCallback
 import cn.woochen.common_config.net.state.DefaultErrorCallback
 import cn.woochen.common_config.net.state.DefaultLoadingCallback
 import cn.woochen.common_config.net.state.DefaultLoadingHasContentCallback
+import cn.woochen.common_config.util.ConfigPref
 import cn.woochen.common_config.util.UserPref
 import com.kingja.loadsir.callback.SuccessCallback
 import com.kingja.loadsir.core.LoadSir
@@ -37,6 +38,7 @@ open class BaseApplication : Application() {
 
     open fun initSp() {
         UserPref.setContext(this)
+        ConfigPref.setContext(this)
     }
 
     /**

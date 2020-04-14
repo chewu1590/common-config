@@ -7,9 +7,10 @@ import android.os.Build
 import android.support.v4.app.NotificationManagerCompat
 
 /**
- * Created by Administrator on 2018/9/21.
+ *权限检查工具类
+ *@author woochen
+ *@time 2020-04-14 16:43
  */
-
 object PermissionCheckUtil {
 
 

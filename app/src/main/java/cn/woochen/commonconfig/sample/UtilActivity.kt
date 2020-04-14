@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import cn.woochen.common_config.util.GlideUtil
-import cn.woochen.common_config.util.PhoneUtil
+import cn.woochen.common_config.util.SystemAppUtil
 import cn.woochen.common_config.util.logee
 import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.R
@@ -28,7 +28,7 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
                 toast( "woochen")
             }
             btn_call -> {
-                PhoneUtil.call(this,"88888888")
+                SystemAppUtil.call(this,"88888888")
             }
         }
     }

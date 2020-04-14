@@ -1,46 +1,29 @@
 package cn.woochen.common_config.util
 
 import android.text.TextUtils
-import android.util.Log
-import android.view.Gravity
 import android.widget.Toast
-import cn.woochen.common_config.Constant
 import cn.woochen.common_config.base.BaseApplication
 
-
 /**
- * info print utils
- *@author woochen
- *@time 2019/3/15 6:50 PM
- */
-fun Any.toast(msg: String?) {
+ *
+ * 类描述：toast工具类
+ * 创建人：woochen
+ * 创建时间：2020-04-14 17:53
+ * 修改备注：
+ **/
+fun Any.toast( msg: String?) {
     if (TextUtils.isEmpty(msg)) return
     try {
-        Constant.toast?.apply {
+        Toast.makeText(BaseApplication.context, "", Toast.LENGTH_SHORT).apply {
             setText(msg)
-            show()
-        } ?: run {
-            Toast.makeText(BaseApplication.context, null, Toast.LENGTH_SHORT).apply {
-                setText(msg)
-                setGravity(Gravity.CENTER,0,0)
-                Constant.toast = this
-            }.show()
-        }
+        }.show()
     } catch (e: Exception) {
-        Toast.makeText(BaseApplication.context, msg, Toast.LENGTH_SHORT).show()
     }
 }
 
 fun Any.toast(stringId: Int) {
-    toast(BaseApplication.context.getString(stringId))
+    try {
+        toast(BaseApplication.context?.getString(stringId))
+    } catch (e: Exception) {
+    }
 }
-
-fun Any.logee(msg: String) {
-    Log.e(javaClass.simpleName, msg)
-}
-
-fun Any.soutt(msg: String) {
-    System.err.println("${javaClass.simpleName} ->" + msg)
-}
-
-

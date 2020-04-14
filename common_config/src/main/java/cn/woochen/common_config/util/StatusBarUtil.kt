@@ -21,7 +21,6 @@ import java.io.InputStreamReader
  */
 object StatusBarUtil {
 
-
     private val isOverMiUi7  by lazy {
         getSystemProperty()
     }
@@ -228,12 +227,8 @@ object StatusBarUtil {
 
             }
         }
-
-
         return false
     }
-
-
 
     /**
      * 设置状态栏图标为深色和魅族特定的文字风格

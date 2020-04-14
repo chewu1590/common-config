@@ -66,17 +66,17 @@ object StringUtil {
     /**
      * 字符串部分替换为特殊符号
      */
-    fun replaceByStar(message: String): String {
-        var finalStr = ""
-        if (message.length == 1) finalStr = "${message[0]}"
-        if (message.length ==2){
-            finalStr = "${message[0]}*"
+    fun replaceByStar(message: String, startIndex: Int, replaceNum: Int): String {
+        val replaceSymbol = "*"//替换符号
+        val stringBuilder = StringBuilder()
+        for (i in message.indices) {
+            val number = message[i]
+            if (i >= startIndex && i < startIndex + replaceNum) {
+                stringBuilder.append(replaceSymbol)
+            } else {
+                stringBuilder.append(number)
+            }
         }
-        if (message.length > 2){
-            finalStr = "${message[0]}*${message[message.length -1]}"
-        }
-
-
-        return finalStr
+        return stringBuilder.toString()
     }
 }

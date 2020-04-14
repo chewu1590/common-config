@@ -7,17 +7,17 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
- *用户sp工具类(建议保存用户相关的数据，退出登录后清除)
+ *配置sp工具类(建议保存卸载才清除的数据)
  *@author woochen
- *@time 2019/3/26 2:27 PM
+ *@time 2020-04-14 17:00
  * 备注：使用前需要初始化!!!
  */
-class UserPref<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T> {
+class ConfigPref<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T> {
 
     companion object {
         lateinit var sharePreference: SharedPreferences
         fun setContext(context: Context) {
-            sharePreference = context.getSharedPreferences(context.packageName + ConfigConstant.USER_PREF_NAME
+            sharePreference = context.getSharedPreferences(context.packageName + ConfigConstant.CONFIG_PREF_NAME
                     , Context.MODE_PRIVATE)
         }
 
@@ -38,7 +38,7 @@ class UserPref<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T>
             is Int -> getInt(name, value)
             is Long -> getLong(name, value)
             is Float -> getFloat(name, value)
-            else -> throw IllegalArgumentException("This type can not be saved into Preferences")
+            else -> throw IllegalArgumentException("This type can be saved into Preferences")
         }
         res as T
     }
@@ -54,7 +54,7 @@ class UserPref<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T>
             is Int -> putInt(name, value)
             is Long -> putLong(name, value)
             is Float -> putFloat(name, value)
-            else -> throw IllegalArgumentException("This type can not be saved into Preferences")
+            else -> throw IllegalArgumentException("This type can be saved into Preferences")
         }.apply()
     }
 }

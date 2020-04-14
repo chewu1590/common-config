@@ -1,10 +1,5 @@
 package cn.woochen.common_config.util;
 
-/**
- *
- *@author woochen123
- *@time 2017/8/24 10:21
- */
 
 import android.util.Log;
 
@@ -21,9 +16,9 @@ import java.security.spec.RSAPublicKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * 功能简述: 加密解密工具类，对MD5/BASE64/DES/RSA等算法提供了包装.
- * @author Nick Xu
- * @version 1.0
+ *功能简述: 加密解密工具类，对MD5/BASE64/DES/RSA等算法提供了包装.
+ *@author woochen123
+ *@time 2017/8/24 10:21
  */
 public class RsaUtil {
     private static final String TAG = "RsaUtil";

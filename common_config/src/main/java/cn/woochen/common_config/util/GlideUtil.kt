@@ -24,33 +24,32 @@ object GlideUtil {
 
     /**
      * 加载普通图片
+     * @param placeholderId 加载中资源图片
+     * @param errorId 加载错误资源图片
+     * @param transformations 图片变化
+     * @see <a href="https://github.com/wasabeef/glide-transformations">transformations</a>
      */
     @SuppressLint("CheckResult")
-    fun load(context: Context, url: Any?, imageView: ImageView, @DrawableRes placeholderId:Int = R.drawable.ic_default_pic, @DrawableRes  errorId:Int = R.drawable.ic_default_pic, transformations:MultiTransformation<Bitmap>?= null) {
+    fun load(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0, transformations: MultiTransformation<Bitmap>? = null) {
+        if (imageView == null) return
         val requestOptions = RequestOptions()
         if (transformations != null) requestOptions.transform(transformations)
-        requestOptions
-            .placeholder(placeholderId)
-            .error(errorId)
-        Glide.with(context)
-            .load(url)
-            .apply(requestOptions)
-            .into(imageView)
+        if (placeholderId != null) requestOptions.placeholder(placeholderId)
+        if (errorId != null) requestOptions.placeholder(errorId)
+        Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
-
 
 
     /**
      * 加载圆型图片
      */
     @SuppressLint("CheckResult")
-    fun loadCircle(context: Context, url: Any?, imageView: ImageView, @DrawableRes  placeholderId:Int = R.drawable.ic_default_pic, @DrawableRes  errorId:Int = R.drawable.ic_default_pic) {
+    fun loadCircle(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0) {
+        if (imageView == null) return
         val requestOptions = RequestOptions.circleCropTransform().diskCacheStrategy(DiskCacheStrategy.ALL)
-        requestOptions.placeholder(placeholderId).error(errorId)
-        Glide.with(context)
-            .load(url)
-            .apply(requestOptions)
-            .into(imageView)
+        if (placeholderId != null) requestOptions.placeholder(placeholderId)
+        if (errorId != null) requestOptions.placeholder(errorId)
+        Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
 
     /**
@@ -58,14 +57,13 @@ object GlideUtil {
      * @param angleValue 弧度(dp)
      */
     @SuppressLint("CheckResult")
-    fun loadRec(context: Context, url: Any?, imageView: ImageView, angleValue: Float, @DrawableRes placeholderId:Int = R.drawable.ic_default_pic, @DrawableRes  errorId:Int = R.drawable.ic_default_pic) {
+    fun loadRec(context: Context, url: Any?, imageView: ImageView?, angleValue: Float, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0) {
+        if (imageView == null) return
         val roundedCorners = RoundedCorners(UiUtils.dp2px(context, angleValue))
-        val options = RequestOptions.bitmapTransform(roundedCorners)
-        options.placeholder(placeholderId).error(errorId)
-        Glide.with(context)
-            .load(url)
-            .apply(options)
-            .into(imageView)
+        val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
+        if (placeholderId != null) requestOptions.placeholder(placeholderId)
+        if (errorId != null) requestOptions.placeholder(errorId)
+        Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
 
 }

@@ -8,6 +8,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
 class DefaultRetrofitUtil {
@@ -18,6 +19,7 @@ class DefaultRetrofitUtil {
     private val callAdapterFactories = mutableListOf<CallAdapter.Factory>()
 
     private var debugMode = true
+    private var canProxy = true
     private var timeout = 5L
     private val intercepters = mutableListOf<Interceptor>()
     private val networkIntercepters = mutableListOf<Interceptor>()
@@ -49,8 +51,8 @@ class DefaultRetrofitUtil {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
         }
         val clientBuilder = OkHttpClient.Builder()
-        clientBuilder
-            .connectTimeout(timeout, TimeUnit.SECONDS)
+        if (!canProxy) clientBuilder.proxy(Proxy.NO_PROXY)
+        clientBuilder.connectTimeout(timeout, TimeUnit.SECONDS)
             .writeTimeout(timeout, TimeUnit.SECONDS)
             .readTimeout(timeout, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
@@ -89,6 +91,14 @@ class DefaultRetrofitUtil {
      */
     fun debugMode(isDebug: Boolean): DefaultRetrofitUtil {
         debugMode = isDebug
+        return this
+    }
+
+    /**
+     * 代理开关（默认允许抓包）
+     */
+    fun proxy(canProxy: Boolean): DefaultRetrofitUtil {
+        this.canProxy = canProxy
         return this
     }
 
