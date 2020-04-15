@@ -35,7 +35,7 @@ object GlideUtil {
         val requestOptions = RequestOptions()
         if (transformations != null) requestOptions.transform(transformations)
         if (placeholderId != null) requestOptions.placeholder(placeholderId)
-        if (errorId != null) requestOptions.placeholder(errorId)
+        if (errorId != null) requestOptions.error(errorId)
         Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
 
@@ -48,7 +48,7 @@ object GlideUtil {
         if (imageView == null) return
         val requestOptions = RequestOptions.circleCropTransform().diskCacheStrategy(DiskCacheStrategy.ALL)
         if (placeholderId != null) requestOptions.placeholder(placeholderId)
-        if (errorId != null) requestOptions.placeholder(errorId)
+        if (errorId != null) requestOptions.error(errorId)
         Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
 
@@ -62,7 +62,7 @@ object GlideUtil {
         val roundedCorners = RoundedCorners(UiUtils.dp2px(context, angleValue))
         val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
         if (placeholderId != null) requestOptions.placeholder(placeholderId)
-        if (errorId != null) requestOptions.placeholder(errorId)
+        if (errorId != null) requestOptions.error(errorId)
         Glide.with(context).load(url).apply(requestOptions).into(imageView)
     }
 
