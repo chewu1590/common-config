@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import cn.woochen.common_config.util.FragmentManagerHelper
-import cn.woochen.common_config.util.logee
 import cn.woochen.commonconfig.R
 import kotlinx.android.synthetic.main.activity_switch_tab.*
 
@@ -37,9 +36,7 @@ class SwitchTabActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (savedInstanceState !=null){
-            logee("savedInstanceState exist")
         }else{
-            logee("savedInstanceState is null")
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_switch_tab)
@@ -54,7 +51,6 @@ class SwitchTabActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initFragments() {
-        logee("initFragments")
         mTabFragment1 = BlankFragment.newInstance("标签一的内容")
         mFragmentManagerHelper.addFragment(mTabFragment1!!,"1")
     }

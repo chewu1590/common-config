@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import cn.woochen.common_config.util.GlideUtil
 import cn.woochen.common_config.util.SystemAppUtil
-import cn.woochen.common_config.util.logee
 import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.R
 import kotlinx.android.synthetic.main.activity_util.*
@@ -24,7 +23,6 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "woochen", Toast.LENGTH_SHORT).show()
             }
             btn_purple -> {
-                logee("woochen")
                 toast( "woochen")
             }
             btn_call -> {

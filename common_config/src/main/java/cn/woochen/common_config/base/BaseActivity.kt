@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.v7.app.AppCompatActivity
-import cn.woochen.common_config.util.logee
 
 
 /**
@@ -79,7 +78,6 @@ abstract class BaseActivity : AppCompatActivity() {
         } else { // 其他方式
             return true
         }
-        logee("tagResult:${tag == mStartActivityTag} timeResult:${mStartActivityTime >= SystemClock.uptimeMillis() - 500}" )
         if (tag == mStartActivityTag  && mStartActivityTime >= SystemClock.uptimeMillis() - 500) {
             // 检查不通过
             result = false

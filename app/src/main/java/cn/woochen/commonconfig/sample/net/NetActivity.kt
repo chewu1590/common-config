@@ -4,7 +4,6 @@ import android.os.SystemClock
 import android.view.View
 import cn.woochen.common_config.mvp.BaseMvpActivity
 import cn.woochen.common_config.mvp.InjectPresenter
-import cn.woochen.common_config.util.logee
 import cn.woochen.commonconfig.R
 import cn.woochen.commonconfig.sample.net.mvp.contract.TestContract
 import cn.woochen.commonconfig.sample.net.mvp.presenter.TestPresenter
@@ -23,7 +22,6 @@ class NetActivity : BaseMvpActivity(), View.OnClickListener ,TestContract.ITestV
     }
 
     override fun testFail() {
-        logee("请求失败！")
     }
 
 
