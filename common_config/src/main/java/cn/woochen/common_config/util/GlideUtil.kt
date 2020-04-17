@@ -30,7 +30,7 @@ object GlideUtil {
      * @see <a href="https://github.com/wasabeef/glide-transformations">transformations</a>
      */
     @SuppressLint("CheckResult")
-    fun load(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0, transformations: MultiTransformation<Bitmap>? = null) {
+    fun load(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = null, @DrawableRes errorId: Int? = null, transformations: MultiTransformation<Bitmap>? = null) {
         if (imageView == null) return
         val requestOptions = RequestOptions()
         if (transformations != null) requestOptions.transform(transformations)
@@ -44,7 +44,7 @@ object GlideUtil {
      * 加载圆型图片
      */
     @SuppressLint("CheckResult")
-    fun loadCircle(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0) {
+    fun loadCircle(context: Context, url: Any?, imageView: ImageView?, @DrawableRes placeholderId: Int? = null, @DrawableRes errorId: Int? = null) {
         if (imageView == null) return
         val requestOptions = RequestOptions.circleCropTransform().diskCacheStrategy(DiskCacheStrategy.ALL)
         if (placeholderId != null) requestOptions.placeholder(placeholderId)
@@ -57,7 +57,7 @@ object GlideUtil {
      * @param angleValue 弧度(dp)
      */
     @SuppressLint("CheckResult")
-    fun loadRec(context: Context, url: Any?, imageView: ImageView?, angleValue: Float, @DrawableRes placeholderId: Int? = 0, @DrawableRes errorId: Int? = 0) {
+    fun loadRec(context: Context, url: Any?, imageView: ImageView?, angleValue: Float, @DrawableRes placeholderId: Int? = null, @DrawableRes errorId: Int? = null) {
         if (imageView == null) return
         val roundedCorners = RoundedCorners(UiUtils.dp2px(context, angleValue))
         val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
