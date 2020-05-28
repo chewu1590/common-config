@@ -18,12 +18,12 @@ class TestPresenter : BasePresenter<TestContract.ITestView>(), TestContract.ITes
     private val mTestModel: TestModel = TestModel()
 
     override fun forTest() {
-        val rxBaseObserver = object : DefaultBaseObserver<TestBean>() {
+        val rxBaseObserver = object : DefaultBaseObserver<List<TestBean>>() {
             override fun onStart() {
                 view.showLoading(true)
             }
 
-            override fun success(data: TestBean?) {
+            override fun success(data: List<TestBean>?) {
                 view.testSuc()
                 view.showContent()
             }

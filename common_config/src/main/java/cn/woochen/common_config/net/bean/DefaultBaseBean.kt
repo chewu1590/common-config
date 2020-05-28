@@ -7,6 +7,6 @@ package cn.woochen.common_config.net.bean
  * 创建时间：2019/3/26 11:12 AM
  * 修改备注：
  **/
- class DefaultBaseBean<T> (val code:Int = 0,
-                           val msg:String?,
+ class DefaultBaseBean<T> (val errorCode:Int = 0,
+                           val errorMsg:String?,
                            val data: T? )

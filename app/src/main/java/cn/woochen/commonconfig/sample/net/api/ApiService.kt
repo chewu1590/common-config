@@ -15,5 +15,5 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET(UrlConstainer.TEST)
-    fun forTest(): Observable<DefaultBaseBean<TestBean>>
+    fun forTest(): Observable<DefaultBaseBean<List<TestBean>>>
 }

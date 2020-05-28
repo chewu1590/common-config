@@ -18,9 +18,9 @@ class TestModel : BaseModel() {
     /**
      * 测试
      */
-    fun forTest(observer: Observer<DefaultBaseBean<TestBean>>) {
+    fun forTest(observer: Observer<DefaultBaseBean<List<TestBean>>>) {
         rxApi.forTest()
-            .compose<DefaultBaseBean<TestBean>>(RxSchedulers.io_main())
+            .compose<DefaultBaseBean<List<TestBean>>>(RxSchedulers.io_main())
             .subscribe(observer)
     }
 }

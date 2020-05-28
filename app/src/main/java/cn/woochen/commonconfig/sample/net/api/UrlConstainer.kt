@@ -10,10 +10,10 @@ package cn.woochen.commonconfig.sample.net.api
 object UrlConstainer {
      var appBaseUrl = ""
 
-    const val APP_TEST_URL = "http://gank.io/api/" //测试环境
-    const val APP_RELEASE_URL = "http://gank.io/api/"  //线上环境
+    const val APP_TEST_URL = "https://www.wanandroid.com/" //测试环境
+    const val APP_RELEASE_URL = "https://www.wanandroid.com/"  //线上环境
 
 
 //    api
-    const val TEST = "today"  //测试
+    const val TEST = "banner/json"  //测试
 }

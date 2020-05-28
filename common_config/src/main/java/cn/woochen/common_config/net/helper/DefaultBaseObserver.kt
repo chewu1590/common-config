@@ -16,14 +16,14 @@ abstract class DefaultBaseObserver<T> : DisposableObserver<DefaultBaseBean<T>>()
     override fun onStart() {}
 
     override fun onNext(tBaseBean: DefaultBaseBean<T>) {
-        if (tBaseBean.code == 1) {
+        if (tBaseBean.errorCode == 0) {
             try {
                 success(tBaseBean.data)
             } catch (e: Exception) {
                 onError(e)
             }
         } else {
-            val defaultException = DefaultException(tBaseBean.code, tBaseBean.msg)
+            val defaultException = DefaultException(tBaseBean.errorCode, tBaseBean.errorMsg)
             handlerErrorResult(defaultException)
         }
     }
