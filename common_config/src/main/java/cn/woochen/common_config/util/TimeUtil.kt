@@ -61,11 +61,11 @@ object TimeUtil {
         val sb = StringBuffer()
         val min = time / 60
         val sec = time % 60
-        if (min > 0){
+        if (min > 0) {
             sb.append(min)
             sb.append("分")
         }
-        if (sec > 0){
+        if (sec > 0) {
             sb.append(sec)
             sb.append("秒")
         }
@@ -76,9 +76,9 @@ object TimeUtil {
     /**
      * 得到当前时间毫秒值
      */
-    fun getCurrentTime():Long{
+    fun getCurrentTime(): Long {
         val calendar = Calendar.getInstance()
-        return calendar.timeInMillis//这是时间戳
+        return calendar.timeInMillis //这是时间戳
     }
 
 
@@ -112,7 +112,7 @@ object TimeUtil {
     /**
      * 更新当前时间 HH:mm:ss
      */
-     fun updateCurrentTime() :String{
+    fun updateCurrentTime(): String {
         val now = Date()
         val format = SimpleDateFormat("HH:mm:ss")
         val time = format.format(now)
@@ -179,18 +179,36 @@ object TimeUtil {
         val senond: Int
         day = (time / 3600 / 24).toInt()
 
-        if (day == 1)
-            return "1天前"
-        if (day > 1)
-            return SimpleDateFormat("yyyy-MM-dd").format(publishTime)
+        if (day == 1) return "1天前"
+        if (day > 1) return SimpleDateFormat("yyyy-MM-dd").format(publishTime)
         hour = (time / 3600).toInt()
-        if (hour > 0)
-            return hour.toString() + "小时前"
+        if (hour > 0) return hour.toString() + "小时前"
         minute = (time / 60).toInt()
-        if (minute > 0)
-            return minute.toString() + "分钟前"
+        if (minute > 0) return minute.toString() + "分钟前"
         senond = time.toInt()
         return if (senond >= 0) "刚刚" else ""
     }
+
+    /**
+     * 字符串转时间戳
+     *
+     * @param timeString
+     * @return 13位"1490025600000"
+     */
+    fun getTimeStamp1(timeString: String?): Long {
+        if (TextUtils.isEmpty(timeString)) return 0
+        var timeStamp = 0L
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val d: Date
+        try {
+            d = sdf.parse(timeString)
+            val tempTimeStamp = d.time
+            timeStamp = tempTimeStamp
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return timeStamp
+    }
+
 
 }

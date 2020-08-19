@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import cn.woochen.common_config.util.ClipboardUtil
 import cn.woochen.common_config.util.GlideUtil
 import cn.woochen.common_config.util.SystemAppUtil
 import cn.woochen.common_config.util.toast
@@ -28,6 +29,12 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
             btn_call -> {
                 SystemAppUtil.call(this,"88888888")
             }
+            btn_copy -> {
+              ClipboardUtil.copyToClipboard(this,"我是内容")
+              /*ClipboardUtil.copyToClipboard(this,"我是内容") {
+                  toast("复制成功了")
+              }*/
+            }
         }
     }
 
@@ -41,6 +48,7 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
         btn_general.setOnClickListener(this)
         btn_purple.setOnClickListener(this)
         btn_call.setOnClickListener(this)
+        btn_copy.setOnClickListener(this)
         GlideUtil.loadCircle(this,"http://pic26.nipic.com/20121227/10193203_131357536000_2.jpg",iv_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher)
     }
 }

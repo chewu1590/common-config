@@ -13,7 +13,6 @@ import androidx.core.app.NotificationManagerCompat
  */
 object PermissionCheckUtil {
 
-
     /**
      * 通知权限是否打开(api 24以上可以调用)
      */

@@ -26,10 +26,24 @@ public class CalendarReminderUtils {
     private static String CALENDER_EVENT_URL = "content://com.android.calendar/events";
     private static String CALENDER_REMINDER_URL = "content://com.android.calendar/reminders";
 
-    private static String CALENDARS_NAME = "nggame";
-    private static String CALENDARS_ACCOUNT_NAME = "nggame";
+    private static String CALENDARS_NAME = "game";
+    private static String CALENDARS_ACCOUNT_NAME = "game";
     private static String CALENDARS_ACCOUNT_TYPE = "redBag";
-    private static String CALENDARS_DISPLAY_NAME = "南瓜小游戏";
+    private static String CALENDARS_DISPLAY_NAME = "游戏";
+
+    /**
+     * 基础配置，调用其他方法前，请先进行配置
+     * @param calendarsName
+     * @param calendarsAccountName
+     * @param calendarsAccountType
+     * @param calendarsDisplayName
+     */
+    public static void config(String calendarsName,String calendarsAccountName,String calendarsAccountType,String calendarsDisplayName){
+        CALENDARS_NAME = calendarsName;
+        CALENDARS_ACCOUNT_NAME = calendarsAccountName;
+        CALENDARS_ACCOUNT_TYPE = calendarsAccountType;
+        CALENDARS_DISPLAY_NAME = calendarsDisplayName;
+    }
 
     /**
      * 检查是否已经添加了日历账户，如果没有添加先添加一个日历账户再查询

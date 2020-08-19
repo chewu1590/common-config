@@ -29,19 +29,6 @@ object SystemAppUtil {
     }
 
     /**
-     * 检测应用是否安装
-     * @param packageName 包名
-     */
-    fun isInstall(context: Context?, packageName: String): Boolean {
-        return try {
-            context?.packageManager?.getPackageInfo(packageName, 0)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
-        }
-    }
-
-    /**
      * 打开微信客户端
      */
     fun openWxApp(context: Context){

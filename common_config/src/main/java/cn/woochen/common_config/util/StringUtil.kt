@@ -22,9 +22,7 @@ object StringUtil {
         val minSize = if (originalArr.size > desArr.size) desArr.size else originalArr.size
         for (index in 0 until minSize){
             try {
-                if (originalArr[index].toInt() > desArr[index].toInt()){
-                    return true
-                }
+                return originalArr[index].toInt() > desArr[index].toInt()
             } catch (e: Exception) {
                 return false
             }

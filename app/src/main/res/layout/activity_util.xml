@@ -55,6 +55,22 @@
         app:layout_constraintLeft_toLeftOf="@+id/btn_general"
         app:layout_constraintTop_toBottomOf="@+id/btn_purple" />
 
+    <Button
+        android:id="@+id/btn_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/select_bg_blue_white"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:text="复制到粘贴板"
+        android:textColor="@drawable/select_txt_white_black"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_general"
+        app:layout_constraintTop_toBottomOf="@+id/btn_call" />
+
 
     <ImageView
         android:id="@+id/iv_img"
@@ -63,6 +79,6 @@
         android:layout_marginTop="10dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintLeft_toLeftOf="@+id/btn_general"
-        app:layout_constraintTop_toBottomOf="@+id/btn_call" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_copy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

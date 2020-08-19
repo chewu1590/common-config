@@ -3,6 +3,8 @@ package cn.woochen.common_config.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.view.View
 import androidx.annotation.DrawableRes
 import android.widget.ImageView
 import cn.woochen.common_config.R
@@ -11,6 +13,8 @@ import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomViewTarget
+import com.bumptech.glide.request.transition.Transition
 
 /**
  *
@@ -64,6 +68,37 @@ object GlideUtil {
         if (placeholderId != null) requestOptions.placeholder(placeholderId)
         if (errorId != null) requestOptions.error(errorId)
         Glide.with(context).load(url).apply(requestOptions).into(imageView)
+    }
+
+    /**
+     * 加载view背景
+     */
+    @SuppressLint("CheckResult")
+    fun loadBackground(context: Context, url: Any?, view: View?, @DrawableRes placeholderId:Int ? = null, @DrawableRes errorId:Int? = null, transformations: MultiTransformation<Bitmap>?= null) {
+        if (view == null) return
+        val requestOptions = RequestOptions()
+        if (transformations != null) requestOptions.transform(transformations)
+        if (placeholderId != null) requestOptions.placeholder(placeholderId)
+        if (errorId != null) requestOptions.error(errorId)
+        val viewTarget =object : CustomViewTarget<View, Drawable?>(view) {
+
+            override fun onLoadFailed(errorDrawable: Drawable?) {
+
+            }
+
+            override fun onResourceCleared(placeholder: Drawable?) {
+
+            }
+
+            override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable?>?) {
+                view.background = resource
+            }
+
+        }
+        Glide.with(context)
+            .load(url)
+            .apply(requestOptions)
+            .into(viewTarget)
     }
 
 }

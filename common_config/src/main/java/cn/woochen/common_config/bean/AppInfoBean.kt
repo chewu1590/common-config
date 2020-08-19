@@ -2,32 +2,35 @@ package cn.woochen.common_config.bean
 
 import cn.woochen.common_config.net.bean.DefaultValue
 
-class AppInfo : DefaultValue {
-    var appName: String? = ""
+/**
+ *
+ * 类描述：
+ * 创建人：woochen
+ * 创建时间：2020-01-05 15:30
+ * 修改备注：
+ **/
+ class AppInfoBean: DefaultValue {
+        var packageTitle: String? = ""
         get() = defaultValue(field, "")
-    var packageName: String? = ""
+        var packageName: String? = ""
         get() = defaultValue(field, "")
-    var versionName: String? = ""
+        var isSystem: String? = ""
         get() = defaultValue(field, "")
-    var versionCode: Int? = 0
+        var firstInstallTime: Long? = 0
         get() = defaultValue(field, 0)
-    var firstInstallTime: Long? = 0
-        get() = defaultValue(field, 0)
-    var lastUpdateTime: Long = 0
+        var lastUpdateTime: Long = 0
         get() = defaultValue(field, 0)
 
     constructor(
-        appName: String?,
+        packageTitle: String?,
         packageName: String?,
-        versionName: String?,
-        versionCode: Int?,
+        isSystem: String?,
         firstInstallTime: Long?,
         lastUpdateTime: Long
     ) {
-        this.appName = appName
+        this.packageTitle = packageTitle
         this.packageName = packageName
-        this.versionName = versionName
-        this.versionCode = versionCode
+        this.isSystem = isSystem
         this.firstInstallTime = firstInstallTime
         this.lastUpdateTime = lastUpdateTime
     }
