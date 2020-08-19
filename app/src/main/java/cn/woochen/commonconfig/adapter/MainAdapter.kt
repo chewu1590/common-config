@@ -1,7 +1,7 @@
 package cn.woochen.commonconfig.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import cn.woochen.commonconfig.R
  * 创建时间：2019/3/14 5:53 PM
  * 修改备注：
  **/
-class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class MainAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder> {
 
     private var mContext: Context
     val mDatas = mutableListOf<String>()
@@ -27,14 +27,14 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mDatas.addAll(datas)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.item_main, parent,false)
         return MyViewHold(view)
     }
 
     override fun getItemCount(): Int = mDatas.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is MyViewHold) {
             val tvText = holder.itemView.findViewById<TextView>(R.id.tv_text)
             tvText.text = mDatas[position]
@@ -43,7 +43,7 @@ class MainAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-    class MyViewHold : RecyclerView.ViewHolder {
+    class MyViewHold : androidx.recyclerview.widget.RecyclerView.ViewHolder {
         constructor(itemView: View) : super(itemView)
     }
 

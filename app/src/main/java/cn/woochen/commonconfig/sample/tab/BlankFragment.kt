@@ -2,7 +2,7 @@ package cn.woochen.commonconfig.sample.tab
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import cn.woochen.commonconfig.R
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 
-class BlankFragment : Fragment() {
+class BlankFragment : androidx.fragment.app.Fragment() {
 
     private val mContent by lazy {
         this.arguments?.getString("arg1")

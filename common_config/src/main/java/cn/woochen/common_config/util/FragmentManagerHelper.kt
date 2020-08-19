@@ -1,7 +1,7 @@
 package cn.woochen.common_config.util
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 
 /**
@@ -10,14 +10,14 @@ import android.support.v4.app.FragmentManager
  * 创建时间：2017/9/7 21:56
  * getFragments()方法需要先add一个fragment才能使用
  */
-class FragmentManagerHelper(private var mFragmentManager: FragmentManager, private val mContainerRes: Int) {
+class FragmentManagerHelper(private var mFragmentManager: androidx.fragment.app.FragmentManager, private val mContainerRes: Int) {
 
     /**
      * 添加fragment
      *
      * @param fragment
      */
-    fun addFragment(fragment: Fragment, fragmentTag: String) {
+    fun addFragment(fragment: androidx.fragment.app.Fragment, fragmentTag: String) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         if (!fragment.isAdded && null == mFragmentManager.findFragmentByTag(fragmentTag)) {
             fragmentTransaction.add(mContainerRes, fragment, fragmentTag)
@@ -29,7 +29,7 @@ class FragmentManagerHelper(private var mFragmentManager: FragmentManager, priva
      * 显示fragment
      * desc : 1.需要先add一个fragment
      */
-    fun swithFragment(fragment: Fragment) {
+    fun swithFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         //隐藏所有fragment
         val childfragments = mFragmentManager.fragments
@@ -50,7 +50,7 @@ class FragmentManagerHelper(private var mFragmentManager: FragmentManager, priva
      * 切换fragment(避免状态异常)
      * desc : 1.需要先add一个fragment
      */
-    fun swithFragmentAllowingStateLoss(fragment: Fragment, fragmentTag: String) {
+    fun swithFragmentAllowingStateLoss(fragment: androidx.fragment.app.Fragment, fragmentTag: String) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         //隐藏所有fragment
         val childfragments = mFragmentManager.fragments
@@ -71,7 +71,7 @@ class FragmentManagerHelper(private var mFragmentManager: FragmentManager, priva
      *
      * @param fragment
      */
-    fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         fragmentTransaction.replace(mContainerRes, fragment).commit()
     }
@@ -79,7 +79,7 @@ class FragmentManagerHelper(private var mFragmentManager: FragmentManager, priva
     /**
      * replace切换（避免状态异常）
      */
-    fun replaceFragmentAllowingStateLoss(fragment: Fragment) {
+    fun replaceFragmentAllowingStateLoss(fragment: androidx.fragment.app.Fragment) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         fragmentTransaction.replace(mContainerRes, fragment).commitAllowingStateLoss()
     }
@@ -87,7 +87,7 @@ class FragmentManagerHelper(private var mFragmentManager: FragmentManager, priva
     /**
      * replace切换（避免状态异常）
      */
-    fun replaceFragmentAllowingStateLoss(fragment: Fragment,tag :String) {
+    fun replaceFragmentAllowingStateLoss(fragment: androidx.fragment.app.Fragment, tag :String) {
         val fragmentTransaction = mFragmentManager.beginTransaction()
         fragmentTransaction.replace(mContainerRes, fragment,tag).commitAllowingStateLoss()
     }

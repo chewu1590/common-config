@@ -3,7 +3,7 @@ package cn.woochen.common_config.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import android.widget.ImageView
 import cn.woochen.common_config.R
 import com.bumptech.glide.Glide

@@ -5,7 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import android.view.ViewGroup
  * 子类在lazyLoad()方法中进行相应处理就可以实现懒加载(仅在pageAdapter中有效果)
  */
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : androidx.fragment.app.Fragment() {
     protected lateinit var contentView: View
     protected lateinit var mContext: Context
 

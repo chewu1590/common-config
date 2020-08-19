@@ -1,7 +1,7 @@
 package cn.woochen.commonconfig.sample.tab
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import cn.woochen.common_config.util.FragmentManagerHelper
 import cn.woochen.commonconfig.R
@@ -44,10 +44,9 @@ class SwitchTabActivity : AppCompatActivity(), View.OnClickListener {
         initFragments()
     }
 
-
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         //activity 销毁的时候，不要保存状态
-//        super.onSaveInstanceState(outState)
+        //        super.onSaveInstanceState(outState)
     }
 
     private fun initFragments() {
