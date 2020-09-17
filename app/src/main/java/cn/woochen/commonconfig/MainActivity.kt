@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.adapter.MainAdapter
+import cn.woochen.commonconfig.sample.GlideActivity
 import cn.woochen.commonconfig.sample.PermissonActivity
 import cn.woochen.commonconfig.sample.UtilActivity
 import cn.woochen.commonconfig.sample.net.NetActivity
@@ -16,9 +17,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private var exitTime: Long = 0
 
-    private val mItemNames = mutableListOf("工具类演示","网络请求演示","权限请求","页签切换")
+    private val mItemNames = mutableListOf("工具类演示", "网络请求演示", "权限请求", "页签切换", "带进度条图片展示")
     private val mMainAdapter by lazy {
-        MainAdapter(this,mItemNames)
+        MainAdapter(this, mItemNames)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,10 +34,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this,
-            androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
+        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rv.adapter = mMainAdapter
-        mMainAdapter.itemClickListener = object: MainAdapter.OnItemClickListener {
+        mMainAdapter.itemClickListener = object : MainAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 itemClickEvent(position)
             }
@@ -58,12 +58,15 @@ class MainActivity : AppCompatActivity() {
             3 -> {
                 start(SwitchTabActivity::class.java)
             }
+            4 -> {
+                start(GlideActivity::class.java)
+            }
         }
     }
 
 
-   private fun start(clazz:Class<*>){
-        val intent = Intent(this,clazz)
+    private fun start(clazz: Class<*>) {
+        val intent = Intent(this, clazz)
         startActivity(intent)
 
     }
@@ -77,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             System.exit(0)
         }
     }
-
 
 
 }

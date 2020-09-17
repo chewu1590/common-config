@@ -17,7 +17,7 @@ object ResourceUtil {
      * @return
      */
     fun getString(resId: Int): String {
-        return BaseApplication.context.resources.getString(resId)
+        return UiUtils.getContext().resources.getString(resId)
     }
 
 
@@ -27,6 +27,6 @@ object ResourceUtil {
      * @return
      */
     fun getColor(resId: Int): Int {
-        return BaseApplication.context.resources.getColor(resId)
+        return UiUtils.getContext().resources.getColor(resId)
     }
 }

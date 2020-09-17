@@ -6,6 +6,13 @@ import android.content.Context
  * 常用单位转换的辅助类
  */
 object UiUtils {
+    private lateinit var mContext: Context
+
+    fun getContext() = mContext
+
+    fun setContext(context: Context) {
+        mContext = context
+    }
 
     /**
      * dp转px

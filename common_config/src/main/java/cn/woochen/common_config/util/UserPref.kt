@@ -17,8 +17,8 @@ class UserPref<T>(val name: String, val default: T) : ReadWriteProperty<Any?, T>
     companion object {
         lateinit var sharePreference: SharedPreferences
         fun setContext(context: Context) {
-            sharePreference = context.getSharedPreferences(context.packageName + ConfigConstant.USER_PREF_NAME
-                    , Context.MODE_PRIVATE)
+            sharePreference =
+                context.getSharedPreferences(context.packageName + ConfigConstant.USER_PREF_NAME, Context.MODE_PRIVATE)
         }
 
         fun clear() {

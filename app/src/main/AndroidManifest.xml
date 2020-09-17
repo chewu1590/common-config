@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".sample.tab.EmptyActivity"></activity>
+        <activity android:name=".sample.GlideActivity"></activity>
+        <activity android:name=".sample.tab.EmptyActivity" />
         <activity android:name=".sample.tab.SwitchTabActivity" />
         <activity android:name=".sample.PermissonActivity" />
         <activity android:name=".sample.net.NetActivity" />

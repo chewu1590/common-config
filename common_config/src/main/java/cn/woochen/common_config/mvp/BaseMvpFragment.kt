@@ -26,12 +26,6 @@ import com.kingja.loadsir.core.LoadSir
 abstract class BaseMvpFragment : BaseFragment(), IBaseView {
     protected lateinit var mPresenterProxy: IPresenterProxy
     protected var loadService: LoadService<*>? = null
-    private var isRetrying: Boolean = false
-    private var mRetryHandler: Handler? = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            isRetrying = false
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mPresenterProxy = FragmentPresenterProxyImpl(this)
@@ -44,19 +38,24 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
         initData()
     }
 
+    /**
+     * kotlin中在这里可以拿到正确的控件引用
+     */
     protected abstract fun initData()
 
     override fun initLoadSir(contentView: View) {
-        var loadSirTarget = setLoadSirTarget()
-        if (loadSirTarget == null) loadSirTarget = (contentView as ViewGroup).getChildAt(0)
-        loadService = LoadSir.getDefault().register(loadSirTarget) {
-            if (!isRetrying) {
-                isRetrying = true
-                if (mRetryHandler != null) {
-                    mRetryHandler!!.sendEmptyMessageDelayed(MESSAGE_RETRY_CODE, 3000)
-                    requestData()
-                }
-            }
+        loadService = LoadSir.Builder().build().register(setLoadSirTarget() ?: (contentView as ViewGroup).getChildAt(0)) { retry() }
+        setStatusCallbacks()
+    }
+
+    /**
+     * 设置状态页回调
+     * @desc 默认设置两种回调，子类可进行覆盖重写
+     */
+    protected open fun setStatusCallbacks() {
+        loadService?.loadLayout?.apply {
+            setupCallback(DefaultLoadingCallback())
+            setupCallback(DefaultLoadingHasContentCallback())
         }
     }
 
@@ -64,6 +63,13 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
      * 设置状态页面的目标view
      */
     protected open fun setLoadSirTarget(): Any? = null
+
+    /**
+     * 请求网络数据(错误重试执行)
+     */
+    protected open fun retry() {
+        requestData()
+    }
 
     /**
      * 数据请求(重试时默认会执行)
@@ -75,35 +81,32 @@ abstract class BaseMvpFragment : BaseFragment(), IBaseView {
     override fun onDestroy() {
         mPresenterProxy.unbindPresenter()
         super.onDestroy()
-        if (mRetryHandler != null) {
-            mRetryHandler!!.removeCallbacksAndMessages(null)
-            mRetryHandler = null
-        }
     }
 
 
     override fun showContent() {
-        loadService!!.showSuccess()
+        loadService?.showSuccess()
     }
 
-    override fun showEmpty() {
-        loadService!!.showCallback(DefaultEmptyCallback::class.java)
-    }
-
+    /**
+     * 默认空实现，可用于子类进行扩展
+     */
     override fun showError() {
-        loadService!!.showCallback(DefaultErrorCallback::class.java)
+
+    }
+
+    /**
+     * 默认空实现，可用于子类进行扩展
+     */
+    override fun showEmpty() {
+
     }
 
     override fun showLoading(showContent: Boolean) {
         if (showContent) {
-            loadService!!.showCallback(DefaultLoadingHasContentCallback::class.java)
+            loadService?.showCallback(DefaultLoadingHasContentCallback::class.java)
         } else {
-            loadService!!.showCallback(DefaultLoadingCallback::class.java)
+            loadService?.showCallback(DefaultLoadingCallback::class.java)
         }
     }
-
-    companion object {
-        private val MESSAGE_RETRY_CODE = 1000
-    }
-
 }

@@ -14,7 +14,7 @@ import cn.woochen.common_config.base.BaseApplication
 fun Any.toast( msg: String?) {
     if (TextUtils.isEmpty(msg)) return
     try {
-        Toast.makeText(BaseApplication.context, "", Toast.LENGTH_SHORT).apply {
+        Toast.makeText(UiUtils.getContext(), "", Toast.LENGTH_SHORT).apply {
             setText(msg)
         }.show()
     } catch (e: Exception) {
@@ -23,7 +23,7 @@ fun Any.toast( msg: String?) {
 
 fun Any.toast(stringId: Int) {
     try {
-        toast(BaseApplication.context?.getString(stringId))
+        toast(UiUtils.getContext().getString(stringId))
     } catch (e: Exception) {
     }
 }

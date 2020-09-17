@@ -22,40 +22,8 @@ import com.kingja.loadsir.core.LoadSir
  */
 open class BaseApplication : Application() {
 
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var context: Context
-    }
-
     override fun onCreate() {
         super.onCreate()
-        context = this
-        initLoadSir()
-        initSp()
-        //bug collection,push,data collection,mutiChannel pack
-    }
-
-
-    open fun initSp() {
-        UserPref.setContext(this)
-        ConfigPref.setContext(this)
-    }
-
-    /**
-     *init LoadingLayout
-     * @desc if necessary,can override this method.if you do this,you must override the  method such as showContent() etc
-     * under of the class for their subclass
-     * @see cn.woochen.common_config.mvp.BaseMvpActivity
-     * @see cn.woochen.common_config.mvp.BaseMvpFragment
-     */
-    open fun initLoadSir() {
-        LoadSir.beginBuilder()
-            .addCallback(DefaultErrorCallback())
-            .addCallback(DefaultEmptyCallback())
-            .addCallback(DefaultLoadingCallback())
-            .addCallback(DefaultLoadingHasContentCallback())
-            .setDefaultCallback(SuccessCallback::class.java)
-            .commit()
     }
 
 }

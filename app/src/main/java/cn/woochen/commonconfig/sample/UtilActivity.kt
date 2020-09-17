@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import cn.woochen.common_config.util.ClipboardUtil
-import cn.woochen.common_config.util.GlideUtil
-import cn.woochen.common_config.util.SystemAppUtil
-import cn.woochen.common_config.util.toast
+import cn.woochen.common_config.util.*
 import cn.woochen.commonconfig.R
 import kotlinx.android.synthetic.main.activity_util.*
 
