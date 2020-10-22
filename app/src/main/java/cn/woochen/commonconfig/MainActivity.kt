@@ -14,6 +14,7 @@ import cn.woochen.commonconfig.sample.net.NetActivity
 import cn.woochen.commonconfig.sample.tab.SwitchTabActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity() {
     private var exitTime: Long = 0
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-
     }
 
     private fun initView() {

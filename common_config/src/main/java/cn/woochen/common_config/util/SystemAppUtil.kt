@@ -7,7 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.text.TextUtils
 /**
- *系统应用工具类
+ *系统应用/三方应用工具类
  *@author woochen
  *@time 2019/10/8 13:39
  */
@@ -38,6 +38,19 @@ object SystemAppUtil {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.component = cmp
         context.startActivity(intent)
+    }
+
+    /**
+     * 打开微信扫一扫
+     */
+    fun openWeixinToQE(context: Context) {
+        try {
+            val intent: Intent = context.packageManager.getLaunchIntentForPackage("com.tencent.mm")
+            intent.putExtra("LauncherUI.From.Scaner.Shortcut", true)
+            context.startActivity(intent)
+        } catch (e: java.lang.Exception) {
+
+        }
     }
 
     /**

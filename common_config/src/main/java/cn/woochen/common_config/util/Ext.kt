@@ -2,7 +2,6 @@ package cn.woochen.common_config.util
 
 import android.text.TextUtils
 import android.widget.Toast
-import cn.woochen.common_config.base.BaseApplication
 
 /**
  *

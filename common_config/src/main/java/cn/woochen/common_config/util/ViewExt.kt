@@ -19,3 +19,24 @@ fun View.setOnSingleClickListener(singleClickListener: OnSingleClickListener?, t
             singleClickListener?.onSingleClick(this)
         }
 }
+
+/**
+ * 视图可见
+ */
+fun View.visible(){
+    this.visibility = View.VISIBLE
+}
+
+/**
+ * 视图不可见
+ */
+fun View.gone(){
+    this.visibility = View.GONE
+}
+
+/**
+ * 视图不可见
+ */
+fun View.invisible(){
+    this.visibility = View.INVISIBLE
+}

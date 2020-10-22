@@ -1,6 +1,7 @@
 package cn.woochen.common_config
 
 import android.content.Context
+import androidx.startup.AppInitializer
 import androidx.startup.Initializer
 import cn.woochen.common_config.util.ConfigPref
 import cn.woochen.common_config.util.UiUtils
