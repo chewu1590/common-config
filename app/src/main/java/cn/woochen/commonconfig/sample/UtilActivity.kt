@@ -27,7 +27,7 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
                 SystemAppUtil.call(this,"88888888")
             }
             btn_copy -> {
-              ClipboardUtil.copyToClipboard(this,"我是内容")
+                "我是内容".copyToClipboard(this)
               /*ClipboardUtil.copyToClipboard(this,"我是内容") {
                   toast("复制成功了")
               }*/
@@ -46,6 +46,6 @@ class UtilActivity : AppCompatActivity(), View.OnClickListener {
         btn_purple.setOnClickListener(this)
         btn_call.setOnClickListener(this)
         btn_copy.setOnClickListener(this)
-        GlideUtil.loadCircle(this,"http://pic26.nipic.com/20121227/10193203_131357536000_2.jpg",iv_img,R.mipmap.ic_launcher,R.mipmap.ic_launcher)
+        iv_img.loadCircle(this,"http://pic26.nipic.com/20121227/10193203_131357536000_2.jpg",R.mipmap.ic_launcher,R.mipmap.ic_launcher)
     }
 }

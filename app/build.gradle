@@ -37,10 +37,9 @@ dependencies {
     })
     testImplementation 'junit:junit:4.13'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation project(':common_config')
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
-//    implementation 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
+    kapt 'com.github.bumptech.glide:okhttp3-integration:4.11.0'
 
 }
