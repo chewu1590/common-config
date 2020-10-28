@@ -1,7 +1,11 @@
 package cn.woochen.common_config
 
 
+import android.view.View
+import cn.woochen.common_config.helper.OnSingleClickListener
+import cn.woochen.common_config.util.UiUtils
 import cn.woochen.common_config.util.saveCount
+import cn.woochen.common_config.util.setOnSingleClickListener
 
 /**
  * 类描述：模块测试
@@ -15,5 +19,8 @@ internal object Test {
     fun main(args: Array<String>) {
         println(0.02.saveCount(5))
         println(13.1569.saveCount(5))
+        View(UiUtils.context).setOnSingleClickListener(OnSingleClickListener {
+
+        })
     }
 }

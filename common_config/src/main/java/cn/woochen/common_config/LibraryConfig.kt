@@ -19,7 +19,7 @@ class LibraryConfig : Initializer<Unit> {
     override fun create(context: Context) {
         UserPref.setContext(context)
         ConfigPref.setContext(context)
-        UiUtils.setContext(context)
+        UiUtils.context = context
     }
 
     override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()

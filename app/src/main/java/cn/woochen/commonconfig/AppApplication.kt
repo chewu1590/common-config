@@ -2,6 +2,7 @@ package cn.woochen.commonconfig
 
 import cn.woochen.common_config.base.BaseApplication
 import cn.woochen.common_config.net.DefaultRetrofitUtil
+import cn.woochen.common_config.util.UiUtils
 import cn.woochen.commonconfig.sample.net.api.UrlConstainer
 
 /**

@@ -13,7 +13,7 @@ import android.widget.Toast
 fun Any.toast( msg: String?) {
     if (TextUtils.isEmpty(msg)) return
     try {
-        Toast.makeText(UiUtils.getContext(), "", Toast.LENGTH_SHORT).apply {
+        Toast.makeText(UiUtils.context, "", Toast.LENGTH_SHORT).apply {
             setText(msg)
         }.show()
     } catch (e: Exception) {
@@ -22,7 +22,7 @@ fun Any.toast( msg: String?) {
 
 fun Any.toast(stringId: Int) {
     try {
-        toast(UiUtils.getContext().getString(stringId))
+        toast(UiUtils.context.getString(stringId))
     } catch (e: Exception) {
     }
 }

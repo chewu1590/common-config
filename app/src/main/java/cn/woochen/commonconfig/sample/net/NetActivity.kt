@@ -7,7 +7,10 @@ import cn.woochen.common_config.mvp.InjectPresenter
 import cn.woochen.commonconfig.R
 import cn.woochen.commonconfig.sample.net.mvp.contract.TestContract
 import cn.woochen.commonconfig.sample.net.mvp.presenter.TestPresenter
+import com.jakewharton.rxbinding2.view.RxView
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_net.*
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
 /**
@@ -59,4 +62,5 @@ class NetActivity : BaseMvpActivity(), View.OnClickListener ,TestContract.ITestV
     override fun requestData() {
         mTestPresenter.forTest()
     }
+
 }
