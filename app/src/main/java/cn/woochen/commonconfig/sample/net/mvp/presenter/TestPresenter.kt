@@ -3,6 +3,7 @@ package cn.woochen.commonconfig.sample.net.mvp.presenter
 import cn.woochen.common_config.mvp.BasePresenter
 import cn.woochen.common_config.net.helper.DefaultBaseObserver
 import cn.woochen.common_config.net.helper.DefaultException
+import cn.woochen.common_config.util.toast
 import cn.woochen.commonconfig.bean.TestBean
 import cn.woochen.commonconfig.sample.net.mvp.contract.TestContract
 import cn.woochen.commonconfig.sample.net.mvp.model.TestModel
@@ -24,6 +25,7 @@ class TestPresenter : BasePresenter<TestContract.ITestView>(), TestContract.ITes
             }
 
             override fun success(data: List<TestBean>?) {
+                toast(data.toString())
                 view.testSuc()
                 view.showContent()
             }

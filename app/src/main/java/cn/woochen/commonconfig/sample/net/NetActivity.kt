@@ -39,7 +39,7 @@ class NetActivity : BaseMvpActivity(), View.OnClickListener ,TestContract.ITestV
     private fun monitorRequestSuc() {
         showLoading(false)
         thread {
-            SystemClock.sleep(4000)
+            SystemClock.sleep(3000)
             runOnUiThread {
                 showContent()
             }

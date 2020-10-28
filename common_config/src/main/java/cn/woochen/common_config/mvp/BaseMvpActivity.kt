@@ -18,7 +18,7 @@ import com.kingja.loadsir.core.LoadSir
  */
 
 abstract class BaseMvpActivity : BaseActivity(), IBaseView {
-    protected lateinit var mPresenterProxy: IPresenterProxy
+    private lateinit var mPresenterProxy: IPresenterProxy
     protected var loadService: LoadService<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +41,7 @@ abstract class BaseMvpActivity : BaseActivity(), IBaseView {
             setupCallback(DefaultLoadingCallback())
             setupCallback(DefaultLoadingHasContentCallback())
         }
+        showContent()
     }
 
     /**
