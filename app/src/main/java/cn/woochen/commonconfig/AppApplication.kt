@@ -26,7 +26,8 @@ class AppApplication : BaseApplication() {
         }else{
             UrlConstainer.appBaseUrl = UrlConstainer.APP_RELEASE_URL
         }
-        DefaultRetrofitUtil.getInstance().init(UrlConstainer.appBaseUrl)
+        DefaultRetrofitUtil.getInstance()
+            .init(UrlConstainer.appBaseUrl)
     }
 
 

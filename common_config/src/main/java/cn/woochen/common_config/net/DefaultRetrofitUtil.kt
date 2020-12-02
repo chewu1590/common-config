@@ -1,5 +1,6 @@
 package cn.woochen.common_config.net
 
+import okhttp3.EventListener
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +18,7 @@ class DefaultRetrofitUtil {
 
     private val converterFactories = mutableListOf<Converter.Factory>()
     private val callAdapterFactories = mutableListOf<CallAdapter.Factory>()
+    private var eventListener: EventListener.Factory? = null
 
     private var debugMode = true
     private var canProxy = true
@@ -43,6 +45,10 @@ class DefaultRetrofitUtil {
 
     }
 
+    private  var clientBuilder: OkHttpClient.Builder? =null
+
+    private  var retrofitBuilder: Retrofit.Builder?=null
+
     fun init(baseUrl: String) {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         if (debugMode) {
@@ -50,40 +56,46 @@ class DefaultRetrofitUtil {
         } else {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
         }
-        val clientBuilder = OkHttpClient.Builder()
-        if (!canProxy) clientBuilder.proxy(Proxy.NO_PROXY)
-        clientBuilder.connectTimeout(timeout, TimeUnit.SECONDS)
-            .writeTimeout(timeout, TimeUnit.SECONDS)
-            .readTimeout(timeout, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor)
-        if (intercepters.isNotEmpty()) {
-            for (intercepter in intercepters) {
-                clientBuilder.addInterceptor(intercepter)
+        if (clientBuilder == null) {
+            clientBuilder = OkHttpClient.Builder()
+            if (!canProxy) clientBuilder?.proxy(Proxy.NO_PROXY)
+            eventListener?.let {
+                clientBuilder?.eventListenerFactory(it)
+            }
+            clientBuilder?.connectTimeout(timeout, TimeUnit.SECONDS)?.writeTimeout(timeout, TimeUnit.SECONDS)
+                ?.readTimeout(timeout, TimeUnit.SECONDS)?.addInterceptor(httpLoggingInterceptor)
+
+
+            if (intercepters.isNotEmpty()) {
+                for (intercepter in intercepters) {
+                    clientBuilder?.addInterceptor(intercepter)
+                }
+            }
+            if (networkIntercepters.isNotEmpty()) {
+                for (intercepter in networkIntercepters) {
+                    clientBuilder?.addNetworkInterceptor(intercepter)
+                }
             }
         }
-        if (networkIntercepters.isNotEmpty()) {
-            for (intercepter in networkIntercepters) {
-                clientBuilder.addNetworkInterceptor(intercepter)
+        if (retrofitBuilder == null) {
+            retrofitBuilder = Retrofit.Builder()
+            retrofitBuilder?.client(clientBuilder?.build())?.baseUrl(baseUrl)
+            if (converterFactories.size > 0) {
+                converterFactories.forEach {
+                    retrofitBuilder?.addConverterFactory(it)
+                }
+            } else {
+                retrofitBuilder?.addConverterFactory(GsonConverterFactory.create())
+            }
+            if (callAdapterFactories.size > 0) {
+                callAdapterFactories.forEach {
+                    retrofitBuilder?.addCallAdapterFactory(it)
+                }
+            } else {
+                retrofitBuilder?.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             }
         }
-        val retrofitBuilder = Retrofit.Builder()
-            .client(clientBuilder.build())
-            .baseUrl(baseUrl)
-        if (converterFactories.size > 0){
-            converterFactories.forEach {
-                retrofitBuilder.addConverterFactory(it)
-            }
-        }else{
-            retrofitBuilder.addConverterFactory(GsonConverterFactory.create())
-        }
-        if (callAdapterFactories.size > 0){
-            callAdapterFactories.forEach {
-                retrofitBuilder.addCallAdapterFactory(it)
-            }
-        }else{
-            retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        }
-        retrofit = retrofitBuilder.build()
+        retrofit = retrofitBuilder?.build()
     }
 
     /**
@@ -161,7 +173,29 @@ class DefaultRetrofitUtil {
         return this
     }
 
+    /**
+     * 适配器工厂
+     */
+    fun eventListenerFactory(eventListener: EventListener.Factory): DefaultRetrofitUtil {
+        this.eventListener = eventListener
+        return this
+    }
 
+    /**
+     * 自定义okhttp引擎
+     */
+    fun okhttpClientBuilder(builder: OkHttpClient.Builder): DefaultRetrofitUtil {
+        this.clientBuilder = builder
+        return this
+    }
+
+    /**
+     * 自定义retrofit引擎
+     */
+    fun retrofitBuilder(builder: Retrofit.Builder): DefaultRetrofitUtil {
+        this.retrofitBuilder = builder
+        return this
+    }
 
 
 }
