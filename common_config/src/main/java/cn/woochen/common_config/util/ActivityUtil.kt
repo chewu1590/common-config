@@ -29,11 +29,11 @@ object ActivityUtil {
         }
     }
     /**
-     * 添加activity
+     * 移除activity
      */
     fun removeActivity(activity: Activity){
         if (activities.contains(activity)){
-            activities.add(activity)
+            activities.remove(activity)
         }
     }
 

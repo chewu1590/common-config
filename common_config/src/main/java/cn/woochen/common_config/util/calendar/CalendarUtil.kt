@@ -67,17 +67,12 @@ object CalendarUtil {
     fun queryCalendar(calendarCallBack: CalendarCallBack?, isAsync: Boolean = false) {
         if (isAsync) {
             asyncOperate(calendarCallBack) {
-                mAsyncQueryHandler.startQuery(
-                    queryId, null,
-                    mCalendarUri,
-                    CAL_PROJECTION, null, null, null)
+                mAsyncQueryHandler.startQuery(queryId, null, mCalendarUri, CAL_PROJECTION, null, null, null)
             }
         } else {
             var cursor: Cursor?
             try {
-                cursor = mContentResolver.query(
-                    mCalendarUri,
-                    CAL_PROJECTION, null, null, null)
+                cursor = mContentResolver.query(mCalendarUri, CAL_PROJECTION, null, null, null)
                 cursor?.count
             } catch (e: Exception) {
                 cursor = null
@@ -92,8 +87,7 @@ object CalendarUtil {
      * @param block Function0<Unit>
      */
     private fun asyncOperate(callBack: CalendarCallBack?, block: () -> Unit) {
-        querySparse.put(
-            queryId, callBack)
+        querySparse.put(queryId, callBack)
         block.invoke()
         queryId++
     }
@@ -165,8 +159,7 @@ object CalendarUtil {
             .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, accountName)
             .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, accountType).build()
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startInsert(
-                queryId, null, calendarUri, value)
+            mAsyncQueryHandler.startInsert(queryId, null, calendarUri, value)
         }
     }
 
@@ -176,8 +169,7 @@ object CalendarUtil {
      * @return 删除的记录数量
      */
     fun deleteCalendar(calendarId: Long): Int {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mCalendarUri, calendarId)
+        val updateUri: Uri = ContentUris.withAppendedId(mCalendarUri, calendarId)
         return mContentResolver.delete(updateUri, null, null)
     }
 
@@ -187,11 +179,9 @@ object CalendarUtil {
      * @param calendarCallBack CalendarCallBack?
      */
     fun deleteCalendarAsync(calendarId: Long, calendarCallBack: CalendarCallBack? = null) {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mCalendarUri, calendarId)
+        val updateUri: Uri = ContentUris.withAppendedId(mCalendarUri, calendarId)
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startDelete(
-                queryId, null, updateUri, null, null)
+            mAsyncQueryHandler.startDelete(queryId, null, updateUri, null, null)
         }
     }
 
@@ -214,8 +204,7 @@ object CalendarUtil {
             put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Shanghai")
             put(CalendarContract.Events.RRULE, rRULE)
         }
-        val result = mContentResolver.insert(
-            mEventUri, values)
+        val result = mContentResolver.insert(mEventUri, values)
         return if (result == null) -1 else ContentUris.parseId(result)
     }
 
@@ -239,9 +228,7 @@ object CalendarUtil {
             put(CalendarContract.Events.RRULE, rRULE)
         }
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startInsert(
-                queryId, null,
-                mEventUri, value)
+            mAsyncQueryHandler.startInsert(queryId, null, mEventUri, value)
         }
     }
 
@@ -251,8 +238,7 @@ object CalendarUtil {
      * @return 删除的记录数量
      */
     fun deleteEvent(calId: Long): Int {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mEventUri, calId)
+        val updateUri: Uri = ContentUris.withAppendedId(mEventUri, calId)
         return mContentResolver.delete(updateUri, null, null)
     }
 
@@ -262,11 +248,9 @@ object CalendarUtil {
      * @param calendarCallBack CalendarCallBack?
      */
     fun deleteEventAsync(calId: Long, calendarCallBack: CalendarCallBack? = null) {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mEventUri, calId)
+        val updateUri: Uri = ContentUris.withAppendedId(mEventUri, calId)
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startDelete(
-                queryId, null, updateUri, null, null)
+            mAsyncQueryHandler.startDelete(queryId, null, updateUri, null, null)
         }
     }
 
@@ -278,15 +262,12 @@ object CalendarUtil {
     fun queryEvents(calendarCallBack: CalendarCallBack?, isAsync: Boolean = false) {
         if (isAsync) {
             asyncOperate(calendarCallBack) {
-                mAsyncQueryHandler.startQuery(
-                    queryId, null,
-                    mEventUri, null, null, null, null)
+                mAsyncQueryHandler.startQuery(queryId, null, mEventUri, null, null, null, null)
             }
         } else {
             var cursor: Cursor?
             try {
-                cursor = mContentResolver.query(
-                    mEventUri, null, null, null, null)
+                cursor = mContentResolver.query(mEventUri, null, null, null, null)
                 cursor?.count
             } catch (e: Exception) {
                 cursor = null
@@ -306,8 +287,7 @@ object CalendarUtil {
             put(CalendarContract.Reminders.EVENT_ID, eventId)
             put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
         }
-        val result = mContentResolver.insert(
-            mReminderUri, values)
+        val result = mContentResolver.insert(mReminderUri, values)
         return if (result == null) -1 else ContentUris.parseId(result)
     }
 
@@ -322,9 +302,7 @@ object CalendarUtil {
             put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
         }
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startInsert(
-                queryId, null,
-                mReminderUri, values)
+            mAsyncQueryHandler.startInsert(queryId, null, mReminderUri, values)
         }
     }
 
@@ -344,21 +322,14 @@ object CalendarUtil {
     fun queryReminders(eventId: Long, calendarCallBack: CalendarCallBack?, isAsync: Boolean = false) {
         if (isAsync) {
             asyncOperate(calendarCallBack) {
-                mAsyncQueryHandler.startQuery(
-                    queryId, null,
-                    mReminderUri,
-                    REMINDER_PROJECTION,
-                    reminderSelections,
+                mAsyncQueryHandler.startQuery(queryId, null, mReminderUri, REMINDER_PROJECTION, reminderSelections,
                     arrayOf(eventId.toString()), null)
             }
         } else {
             var cursor: Cursor?
             try {
                 cursor =
-                    mContentResolver.query(
-                        mReminderUri,
-                        REMINDER_PROJECTION,
-                        reminderSelections, arrayOf(eventId.toString()),
+                    mContentResolver.query(mReminderUri, REMINDER_PROJECTION, reminderSelections, arrayOf(eventId.toString()),
                         null)
                 cursor?.count
             } catch (e: Exception) {
@@ -374,8 +345,7 @@ object CalendarUtil {
      * @return 删除条目数量
      */
     fun deleteReminder(reminderId: Long): Int {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mReminderUri, reminderId)
+        val updateUri: Uri = ContentUris.withAppendedId(mReminderUri, reminderId)
         return mContentResolver.delete(updateUri, null, null)
     }
 
@@ -385,17 +355,14 @@ object CalendarUtil {
      * @param calendarCallBack
      */
     fun deleteReminderAsync(reminderId: Long, calendarCallBack: CalendarCallBack? = null) {
-        val updateUri: Uri = ContentUris.withAppendedId(
-            mReminderUri, reminderId)
+        val updateUri: Uri = ContentUris.withAppendedId(mReminderUri, reminderId)
         asyncOperate(calendarCallBack) {
-            mAsyncQueryHandler.startDelete(
-                queryId, null, updateUri, null, null)
+            mAsyncQueryHandler.startDelete(queryId, null, updateUri, null, null)
         }
     }
 
     private val mAsyncQueryHandler by lazy {
-        @SuppressLint("HandlerLeak") object : AsyncQueryHandler(
-            mContentResolver) {
+        @SuppressLint("HandlerLeak") object : AsyncQueryHandler(mContentResolver) {
             override fun onQueryComplete(token: Int, cookie: Any?, cur: Cursor?) {
                 asyncResult(token) {
                     querySparse[token]?.queryResult(cur)
@@ -404,8 +371,7 @@ object CalendarUtil {
 
             override fun onInsertComplete(token: Int, cookie: Any?, uri: Uri?) {
                 asyncResult(token) {
-                    querySparse[token]?.insertResult(
-                        if (uri == null) -1 else ContentUris.parseId(uri))
+                    querySparse[token]?.insertResult(if (uri == null) -1 else ContentUris.parseId(uri))
                 }
             }
 
@@ -430,43 +396,44 @@ object CalendarUtil {
      * @param accountName String 日历所属账户名称，当不存在默认日历时需要提供
      * @param accountType String 日历所属类型，当不存在默认日历时需要提供
      */
-    fun addCalendarReminders(startMillis: Long, eventTitle: String, eventDesc: String, rRULE: String, calendarCallBack: CalendarCallBack?, endMillis: Long = startMillis, calendarName: String = "temp_calendar", accountName: String = "temp_account_name", accountType: String = "temp_account_type"){
+    fun addCalendarReminders(startMillis: Long, eventTitle: String, eventDesc: String, rRULE: String, calendarCallBack: CalendarCallBack?, endMillis: Long = startMillis, calendarName: String = "temp_calendar", accountName: String = "temp_account_name", accountType: String = "temp_account_type") {
         thread {
             //如果之前已经存在相同title的事件，先执行删除操作
-            queryEvents(object :
-                SimpleCalendarCallBack() {
+            queryEvents(object : SimpleCalendarCallBack() {
                 override fun queryResult(cursor: Cursor?) {
                     cursor?.let {
-                        it.moveToFirst()
-                        while (!it.isAfterLast) {
-                            val title: String = it.getString(it.getColumnIndex(CalendarContract.Events.TITLE))
-                            if (!TextUtils.isEmpty(title) && title == eventTitle) {
-                                val calId: Long = it.getLong(it.getColumnIndex(CalendarContract.Events._ID)) //取得id
-                                deleteEvent(calId)
+                        try {
+                            it.moveToFirst()
+                            while (!it.isAfterLast) {
+                                val title: String = it.getString(it.getColumnIndex(CalendarContract.Events.TITLE))?:""
+                                val desc: String = it.getString(it.getColumnIndex(CalendarContract.Events.DESCRIPTION))?:""
+                                if (TextUtils.equals(eventTitle,title) &&  TextUtils.equals(eventDesc,desc)) {
+                                    val calId: Long = it.getLong(it.getColumnIndex(CalendarContract.Events._ID)) //取得id
+                                    deleteEvent(calId)
+                                }
+                                it.moveToNext()
                             }
-                            it.moveToNext()
+                        } catch (e: Exception) {
                         }
                     }
                 }
             })
-            queryCalendar(object :
-                SimpleCalendarCallBack() {
+            queryCalendar(object : SimpleCalendarCallBack() {
                 override fun queryResult(cursor: Cursor?) {
-                    var calId = 0L
-                    if (cursor != null && cursor.count > 0) {
-                        if (cursor.moveToFirst()) {
-                            calId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Calendars._ID))
+                    try {
+                        var calId = 0L
+                        if (cursor != null && cursor.count > 0) {
+                            if (cursor.moveToFirst()) {
+                                calId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Calendars._ID))
+                            }
+                        } else {
+                            calId = insertCalendar(calendarName, accountName, accountType)
                         }
-                    } else {
-                        calId = insertCalendar(calendarName,
-                            accountName, accountType)
+                        val eventId = insertEvent(calId, startMillis, endMillis, eventTitle, eventDesc, rRULE)
+                        val reminderId = insertReminders(eventId)
+                        calendarCallBack?.remindResult(reminderId != -1L)
+                    } catch (e: Exception) {
                     }
-                    val eventId =
-                        insertEvent(calId, startMillis,
-                            endMillis, eventTitle, eventDesc, rRULE)
-                    val reminderId =
-                        insertReminders(eventId)
-                    calendarCallBack?.remindResult(reminderId != -1L)
                 }
             })
         }

@@ -57,7 +57,7 @@ fun ImageView.loadCircle(context: Context, url: Any?, @DrawableRes placeholderId
  */
 @SuppressLint("CheckResult")
 fun ImageView.loadRec(context: Context, url: Any?, angleValue: Float, @DrawableRes placeholderId: Int? = null, @DrawableRes errorId: Int? = null) {
-    val roundedCorners = RoundedCorners(angleValue.dp2px())
+    val roundedCorners = RoundedCorners(angleValue.dp.toInt())
     val requestOptions = RequestOptions.bitmapTransform(roundedCorners)
     if (placeholderId != null) requestOptions.placeholder(placeholderId)
     if (errorId != null) requestOptions.error(errorId)

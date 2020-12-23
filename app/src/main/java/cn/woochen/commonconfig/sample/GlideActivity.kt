@@ -13,6 +13,7 @@ import com.bumptech.glide.request.target.CustomViewTarget
 import com.bumptech.glide.request.target.DrawableImageViewTarget
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.activity_glide.*
+import java.security.Signature
 
 
 class GlideActivity : AppCompatActivity() {

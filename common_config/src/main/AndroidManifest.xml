@@ -19,7 +19,7 @@
                 android:value="androidx.startup" />
 
         <!--  手动初始化（也是延迟初始化）-->
-       <!--     <meta-data
+           <!-- <meta-data
                 android:name="cn.woochen.common_config.LibraryConfig"
                 android:value="androidx.startup"
                 tools:node="remove" />-->
