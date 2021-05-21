@@ -3,64 +3,14 @@ package cn.woochen.common_config.util
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.Context
-import android.content.pm.ApplicationInfo
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
-import cn.woochen.common_config.bean.AppInfoBean
 import java.lang.reflect.InvocationTargetException
 
 object PackageUtil {
-
-    /**
-     * 获取所有安装的其他应用
-     */
-    fun getAllOtherInstallPackage(context: Context): List<AppInfoBean> {
-        val list = mutableListOf<AppInfoBean>()
-        // 获取已经安装的所有应用, PackageInfo系统类，包含应用信息
-        val packageManager = context.applicationContext.packageManager
-        val packages = packageManager.getInstalledPackages(0)
-        for (i in packages.indices) {
-            val packageInfo = packages[i]
-            if (packageInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == 0) { //非系统应用
-                // AppInfo 自定义类，包含应用信息
-                if (packageInfo != null) {
-                    val appInfo = AppInfoBean(packageInfo.applicationInfo.loadLabel(packageManager).toString(), //获取应用名称
-                        packageInfo.packageName, //获取应用包名，可用于卸载和启动应用
-                        "0", packageInfo.firstInstallTime, //第一次安装时间
-                        packageInfo.lastUpdateTime //最后一次更新时间
-                    )
-                    list.add(appInfo)
-                }
-            }
-        }
-        return list
-    }
-
-    /**
-     * 获取所有安装的系统应用
-     */
-    fun getAllSystemInstallPackage(context: Context): List<AppInfoBean> {
-        val list = mutableListOf<AppInfoBean>()
-        // 获取已经安装的所有应用, PackageInfo系统类，包含应用信息
-        val packageManager = context.applicationContext.packageManager
-        val packages = packageManager.getInstalledPackages(0)
-        for (i in packages.indices) {
-            val packageInfo = packages[i]
-            if (packageInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0) { //非系统应用
-                // AppInfo 自定义类，包含应用信息
-                if (packageInfo != null) {
-                    val appInfo = AppInfoBean(packageInfo.applicationInfo.loadLabel(packageManager).toString(), //获取应用名称
-                        packageInfo.packageName, //获取应用包名，可用于卸载和启动应用
-                        "1", packageInfo.firstInstallTime, //第一次安装时间
-                        packageInfo.lastUpdateTime //最后一次更新时间
-                    )
-                    list.add(appInfo)
-                }
-            }
-        }
-        return list
-    }
 
 
     /**
@@ -158,8 +108,6 @@ object PackageUtil {
 
     /**
      *目标apk是否已经安装
-     *@author woochen
-     *@time 2020/7/17 4:04 PM
      */
     fun isApkInstalled(context: Context, packageName: String?): Boolean {
         if (packageName.isNullOrBlank()) return false
@@ -170,5 +118,21 @@ object PackageUtil {
         } catch (var4: PackageManager.NameNotFoundException) {
             false
         }
+    }
+
+    /**
+     * 卸载指定包名的应用
+     * @param packageName
+     */
+    fun unInstall(context: Context,packageName: String): Boolean {
+        val b: Boolean = isApkInstalled(context,packageName)
+        if (b) {
+            val packageURI: Uri = Uri.parse("package:$packageName")
+            val intent = Intent(Intent.ACTION_DELETE)
+            intent.data = packageURI
+            context.startActivity(intent)
+            return true
+        }
+        return false
     }
 }

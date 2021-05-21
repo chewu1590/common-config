@@ -1,7 +1,5 @@
 package cn.woochen.common_config.util
 
-import cn.woochen.common_config.base.BaseApplication
-
 
 /**
  * 资源文件工具类
